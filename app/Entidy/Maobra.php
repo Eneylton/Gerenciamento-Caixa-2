@@ -19,15 +19,16 @@ class Maobra
     public $placa;
     public $descricao;
     public $status;
-    public $servicos;
+    public $servico;
+    public $tipo;
     public $mecanicos_id;
-    public $movimentacoes_id;
+    public $caixa_id;
 
     public function cadastar()
     {
 
 
-        $obdataBase = new Database('movimentacoes');
+        $obdataBase = new Database('maobra');
 
         $this->id = $obdataBase->insert([
 
@@ -40,9 +41,10 @@ class Maobra
             'placa'                    => $this->placa,
             'descricao'                => $this->descricao,
             'status'                   => $this->status,
-            'servicos'                 => $this->servicos,
+            'servico'                  => $this->servico,
+            'tipo'                     => $this->tipo,
             'mecanicos_id'             => $this->mecanicos_id,
-            'movimentacoes_id'         => $this->movimentacoes_id
+            'caixa_id'                 => $this->caixa_id
             
 
         ]);
@@ -53,7 +55,7 @@ class Maobra
 
     public function atualizar()
     {
-        return (new Database('movimentacoes'))->update('id = ' . $this->id, [
+        return (new Database('maobra'))->update('id = ' . $this->id, [
             
             'cartao'                   => $this->cartao,
             'dinheiro'                 => $this->dinheiro,
@@ -64,23 +66,24 @@ class Maobra
             'placa'                    => $this->placa,
             'descricao'                => $this->descricao,
             'status'                   => $this->status,
-            'servicos'                 => $this->servicos,
+            'servico'                  => $this->servico,
+            'tipo'                     => $this->tipo,
             'mecanicos_id'             => $this->mecanicos_id,
-            'movimentacoes_id'         => $this->movimentacoes_id
+            'caixa_id'                 => $this->caixa_id
         ]);
     }
 
     public static function getList($fields = null, $table = null, $where = null, $order = null, $limit = null)
     {
 
-        return (new Database('movimentacoes'))->select($fields, $table, $where, $order, $limit)
+        return (new Database('maobra'))->select($fields, $table, $where, $order, $limit)
             ->fetchAll(PDO::FETCH_CLASS, self::class);
     }
 
     public static function getListOne($fields = null, $table = null, $where = null, $order = null, $limit = null)
     {
 
-        return (new Database('movimentacoes'))->select($fields, $table, $where, $order, $limit)
+        return (new Database('maobra'))->select($fields, $table, $where, $order, $limit)
         ->fetchObject(self::class);
     }
 
@@ -89,7 +92,7 @@ class Maobra
     public static function getQtd($fields = null, $table = null, $where = null, $order = null, $limit = null)
     {
 
-        return (new Database('movimentacoes'))->select('COUNT(*) as qtd', 'movimentacoes', null, null)
+        return (new Database('maobra'))->select('COUNT(*) as qtd', 'maobra', null, null)
             ->fetchObject()
             ->qtd;
     }
@@ -97,20 +100,20 @@ class Maobra
 
     public static function getID($fields, $table, $where, $order, $limit)
     {
-        return (new Database('movimentacoes'))->select($fields, $table, 'id = ' . $where, $order, $limit)
+        return (new Database('maobra'))->select($fields, $table, 'id = ' . $where, $order, $limit)
             ->fetchObject(self::class);
     }
 
 
     public function excluir()
     {
-        return (new Database('movimentacoes'))->delete('id = ' . $this->id);
+        return (new Database('maobra'))->delete('id = ' . $this->id);
     }
 
 
     public static function getUsuarioPorEmail($email)
     {
 
-        return (new Database('movimentacoes'))->select('email = "' . $email . '"')->fetchObject(self::class);
+        return (new Database('maobra'))->select('email = "' . $email . '"')->fetchObject(self::class);
     }
 }

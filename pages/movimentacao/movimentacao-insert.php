@@ -2,6 +2,7 @@
 
 require __DIR__.'../../../vendor/autoload.php';
 
+use App\Entidy\Maobra;
 use App\Session\Login;
 use App\Entidy\Movimentacao;
 
@@ -49,6 +50,26 @@ if(isset($_POST['idcaixa'])){
       $mec = $_POST['mecanicos_id'];
     }
 
+
+    if(!empty($_POST['maobra'])){
+
+      if($_POST['dinheiro']){
+
+        $obra = new Maobra;
+
+        $obra->dinheiro = $preco1;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+        
+      }
+    }
 
     $item = new Movimentacao;
     $item->catdespesas_id = $_POST['catdespesas_id'];
