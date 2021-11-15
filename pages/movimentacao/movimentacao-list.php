@@ -3,6 +3,7 @@ require __DIR__ . '../../../vendor/autoload.php';
 
 use App\Db\Pagination;
 use App\Entidy\Catdespesa;
+use App\Entidy\Mecanico;
 use App\Entidy\Movimentacao;
 use App\Session\Login;
 
@@ -42,28 +43,35 @@ $qtd = Movimentacao:: getQtd($where);
 
 $pagination = new Pagination($qtd, $_GET['pagina'] ?? 1, 100);
 
-$listar = Movimentacao::getList(' m.id AS id,m.caixa_id as caixa_id,
+$listar = Movimentacao::getList(' m.id AS id,
+m.caixa_id AS caixa_id,
+m.maobra AS maobra,
 m.catdespesas_id AS catdespesas_id,
+m.mecanicos_id AS mecanicos_id,
 m.data AS data,
 m.descricao AS descricao,
 m.tipo AS tipo,
 m.status AS status,
-m.dinheiro as dinheiro,
-m.cartao as cartao,
-m.debito as debito,
-m.pix as pix,
-m.veiculo as veiculo,
-m.placa as placa,
-m.transferencia as transferencia,
+m.dinheiro AS dinheiro,
+m.cartao AS cartao,
+m.debito AS debito,
+m.pix AS pix,
+m.veiculo AS veiculo,
+m.placa AS placa,
+m.transferencia AS transferencia,
+mc.nome AS mecanicos,
 c.nome AS categoria',
                                                             
 ' movimentacoes AS m
 INNER JOIN
-
-catdespesas AS c ON (m.catdespesas_id = c.id)',
+catdespesas AS c ON (m.catdespesas_id = c.id)
+INNER JOIN
+mecanicos AS mc ON (m.mecanicos_id = mc.id)',
                                      'm.caixa_id='.$idcaixa, 'm.id DESC',$pagination->getLimit());
 
 $categorias = Catdespesa :: getList('*', 'catdespesas',null,'nome ASC');
+
+$mecanicos  = Mecanico :: getList('*','mecanicos',null,'nome ASC');
 
 include __DIR__ . '../../../includes/layout/header.php';
 include __DIR__ . '../../../includes/layout/top.php';
@@ -100,6 +108,9 @@ $(document).ready(function(){
         $('#veiculo').val(data[12]);
         $('#placa').val(data[13]);
         $('#caixa_id').val(data[14]);
+        $('#mecanicos_id').val(data[15]);
+        $('#mecanicos').val(data[16]);
+        $('#maobra').val(data[17]);
        
     });
 });

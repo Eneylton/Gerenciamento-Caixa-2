@@ -18,23 +18,23 @@ foreach ($listar as $item) {
    $id_caixa = $item->caixa_id;
    $total_credito += $item->cartao;
    $total_debito += $item->debito;
-   $total_pix+= $item->pix;
+   $total_pix += $item->pix;
    $total_transferencia += $item->transferencia;
 
    switch ($item->tipo) {
       case '1':
          $total_dinheiro += $item->dinheiro;
          break;
-      
+
       default:
          $saida += $item->dinheiro;
          break;
    }
 
-   if(empty($item->veiculo)){
+   if (empty($item->veiculo)) {
 
-   $veiculo = '<span style="color:#5f6368"> Nenhum !!!! </span>';
-   }else{
+      $veiculo = '<span style="color:#5f6368"> Nenhum !!!! </span>';
+   } else {
       $veiculo = $item->veiculo;
    }
 
@@ -55,6 +55,9 @@ foreach ($listar as $item) {
                       <td style="display:none">' . $item->veiculo . '</td>
                       <td style="display:none">' . $item->placa . '</td>
                       <td style="display:none">' . $item->caixa_id . '</td>
+                      <td style="display:none">' . $item->mecanicos_id . '</td>
+                      <td style="display:none">' . $item->mecanicos . '</td>
+                      <td style="display:none">' . $item->maobra . '</td>
                       
 
                      <td>
@@ -87,7 +90,7 @@ foreach ($listar as $item) {
 
                       <td style="text-transform: uppercase;font-weight: 600; ">
                       <span style="color:' . ($item->tipo <= 0 ? '#ff2121 ' : '#fff ') . '">
-                      R$ ' . number_format($item->dinheiro,"2",",",".") . '
+                      R$ ' . number_format($item->dinheiro, "2", ",", ".") . '
                       </span>
                       
                       </td>
@@ -113,11 +116,11 @@ $resultados = strlen($resultados) ? $resultados : '<tr>
                                                      </tr>';
 
 
-                                                     $total_geral += ($total_dinheiro + $total_credito + $total_debito + $total_pix + $total_transferencia);
+$total_geral += ($total_dinheiro + $total_credito + $total_debito + $total_pix + $total_transferencia);
 
-                                                     $caixa = ($total_geral - $saida); 
-                                                     
-                                                     $saldo = ($total_dinheiro - $saida);
+$caixa = ($total_geral - $saida);
+
+$saldo = ($total_dinheiro - $saida);
 
 //PAGINAÇÂO
 
@@ -171,18 +174,18 @@ foreach ($paginas as $key => $pagina) {
 
                   <table class="table table-bordered table-dark table-bordered table-hover table-striped">
                      <thead>
-                     <tr>
+                        <tr>
                            <td colspan="12">
                               <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"> <i class="fas fa-plus"></i> &nbsp; Adicionar</button>
-                             
-                              <a href="movimentacao-detalhe.php?id=<?= $id_caixa ?>" >
+
+                              <a href="movimentacao-detalhe.php?id=<?= $id_caixa ?>">
                                  <button style="margin-right:50px; font-weight:600; font-size:x-large" type="submit" class="<?= $total_diaria <= 0 ? 'btn btn-danger' : 'btn btn-default' ?> float-right btn-lg"> <i class="fa fa-print" aria-hidden="true"></i>
                                     MOVIMENTAÇÕES </button>
                               </a>
-                     
+
                               <button style="margin-right:50px; font-weight:600; font-size:x-large" type="submit" class="<?= $saldo <= 0 ? 'btn btn-danger' : 'btn btn-success' ?> float-right btn-lg"><i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                SALDO R$ &nbsp;<?= number_format($saldo, "2", ",", ".")  ?></button>
-                              
+                                 SALDO R$ &nbsp;<?= number_format($saldo, "2", ",", ".")  ?></button>
+
 
 
                            </td>
@@ -213,32 +216,32 @@ foreach ($paginas as $key => $pagina) {
                         </td>
                         <td colspan="1" style="text-align: left">
                            <?php
-                             if($saldo <= 0){
-                                echo '<span style="font-size: 20px; font-weight:600; color:#ff0000">R$ &nbsp;'. number_format($saldo,"2",",","."). '</span>';
-                             }else{
-                              echo '<span style="font-size: 20px; font-weight:600; color:#4cb909">R$  &nbsp;'. number_format($saldo,"2",",","."). '</span>';
-                             }
+                           if ($saldo <= 0) {
+                              echo '<span style="font-size: 20px; font-weight:600; color:#ff0000">R$ &nbsp;' . number_format($saldo, "2", ",", ".") . '</span>';
+                           } else {
+                              echo '<span style="font-size: 20px; font-weight:600; color:#4cb909">R$  &nbsp;' . number_format($saldo, "2", ",", ".") . '</span>';
+                           }
                            ?>
                         </td>
-                        <td colspan="1"  style="text-align: left">
-                           <span style="font-size: 20px; font-weight:600;color:#79d7ad">R$ <?= number_format($total_credito,"2",",",".") ?> </span>
+                        <td colspan="1" style="text-align: left">
+                           <span style="font-size: 20px; font-weight:600;color:#79d7ad">R$ <?= number_format($total_credito, "2", ",", ".") ?> </span>
                         </td>
                         <td colspan="1" style="text-align: left">
-                           <span style="font-size: 20px; font-weight:600; color:#79d7ad">R$ <?= number_format($total_debito,"2",",",".") ?></span>
+                           <span style="font-size: 20px; font-weight:600; color:#79d7ad">R$ <?= number_format($total_debito, "2", ",", ".") ?></span>
                         </td>
                         <td colspan="1" style="text-align:left">
-                           <span style="font-size: 20px; font-weight:600; color:#79d7ad">R$ <?= number_format($total_pix,"2",",",".") ?></span>
+                           <span style="font-size: 20px; font-weight:600; color:#79d7ad">R$ <?= number_format($total_pix, "2", ",", ".") ?></span>
                         </td>
                         <td colspan="1" style="text-align: left">
-                           <span style="font-size: 20px; font-weight:600; color:#79d7ad">R$ <?= number_format($total_transferencia,"2",",",".") ?></span>
+                           <span style="font-size: 20px; font-weight:600; color:#79d7ad">R$ <?= number_format($total_transferencia, "2", ",", ".") ?></span>
                         </td>
                         <td colspan="1" style="text-align: center">
                            <?php
-                             if($caixa <= 0){
-                                echo '<span style="font-size: 20px; font-weight:600; color:#ff0000">R$ &nbsp;'. number_format($caixa,"2",",","."). '</span>';
-                             }else{
-                              echo '<span style="font-size: 20px; font-weight:600; color:#94dd04">R$  &nbsp;'. number_format($caixa,"2",",","."). '</span>';
-                             }
+                           if ($caixa <= 0) {
+                              echo '<span style="font-size: 20px; font-weight:600; color:#ff0000">R$ &nbsp;' . number_format($caixa, "2", ",", ".") . '</span>';
+                           } else {
+                              echo '<span style="font-size: 20px; font-weight:600; color:#94dd04">R$  &nbsp;' . number_format($caixa, "2", ",", ".") . '</span>';
+                           }
                            ?>
                         </td>
                      </tr>
@@ -266,7 +269,7 @@ foreach ($paginas as $key => $pagina) {
       <div class="modal-content bg-light">
          <form action="./movimentacao-insert.php" method="post">
 
-            <input type="hidden" name="idcaixa" value="<?=  $idcaixa ?>">
+            <input type="hidden" name="idcaixa" value="<?= $idcaixa ?>">
 
             <div class="modal-header">
                <h4 class="modal-title">Nova categoria
@@ -277,7 +280,7 @@ foreach ($paginas as $key => $pagina) {
             </div>
             <div class="modal-body">
                <div class="form-group">
-               <div class="row">
+                  <div class="row">
                      <div class="col-6">
                         <div class="form-group">
                            <label>Veículo</label>
@@ -290,6 +293,31 @@ foreach ($paginas as $key => $pagina) {
 
                         <label>Placa</label>
                         <input style="text-transform: uppercase;" class="form-control" name="placa">
+
+                     </div>
+                     <div class="col-6">
+
+                        <label>Mão de obra</label>
+                        <input placeholder="R$ 0,00" style="text-transform: uppercase;" class="form-control" name="maobra" id="maobra22">
+
+                     </div>
+
+                     <div class="col-6">
+                        <div class="form-group">
+                           <label>Mecânicos</label>
+                           <select class="form-control select2bs4" style="width: 100%;" name="mecanicos_id">
+
+                              <option value=""> Selecione um mecânico </option>
+                              <?php
+
+                              foreach ($mecanicos as $item) {
+                                 echo '<option value="' . $item->id . '">' . $item->nome . '</option>';
+                              }
+                              ?>
+
+                           </select>
+
+                        </div>
 
                      </div>
 
@@ -320,25 +348,25 @@ foreach ($paginas as $key => $pagina) {
                      <div class="col-2">
                         <div class="form-group">
                            <label>Crédito</label>
-                           <input  placeholder="R$ 0,00"  type="text" class="form-control" name="credito" id="dinheiro2">
+                           <input placeholder="R$ 0,00" type="text" class="form-control" name="credito" id="dinheiro2">
                         </div>
                      </div>
                      <div class="col-2">
                         <div class="form-group">
                            <label>Débito</label>
-                           <input  placeholder="R$ 0,00"  type="text" class="form-control" name="debito" id="dinheiro3">
+                           <input placeholder="R$ 0,00" type="text" class="form-control" name="debito" id="dinheiro3">
                         </div>
                      </div>
                      <div class="col-3">
                         <div class="form-group">
                            <label>Pix</label>
-                           <input  placeholder="R$ 0,00"  type="text" class="form-control" name="pix" id="dinheiro4">
+                           <input placeholder="R$ 0,00" type="text" class="form-control" name="pix" id="dinheiro4">
                         </div>
                      </div>
                      <div class="col-3">
                         <div class="form-group">
                            <label>Transferência</label>
-                           <input  placeholder="R$ 0,00"  type="text" class="form-control" name="transferencia" id="dinheiro5">
+                           <input placeholder="R$ 0,00" type="text" class="form-control" name="transferencia" id="dinheiro5">
                         </div>
                      </div>
 
@@ -386,7 +414,7 @@ foreach ($paginas as $key => $pagina) {
                      </div>
                      <div class="col-4">
                         <div class="form-group">
-                        <label>Observação</label>
+                           <label>Observação</label>
                            <textarea class="form-control" aria-label="With textarea" name="descricao"></textarea>
                         </div>
                      </div>
@@ -399,7 +427,7 @@ foreach ($paginas as $key => $pagina) {
             <div class="modal-footer justify-content-between">
                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
                <button type="submit" class="btn btn-primary">Salvar</button>
-         </div>
+            </div>
 
          </form>
 
@@ -426,18 +454,42 @@ foreach ($paginas as $key => $pagina) {
                <input type="hidden" name="id" id="id">
                <input type="hidden" name="caixa_id" id="caixa_id">
                <div class="row">
-                     <div class="col-6">
-                        <div class="form-group">
-                           <label>Veículo</label>
-                           <input style="text-transform: uppercase;" type="text" class="form-control" name="veiculo" id="veiculo">
-
-                        </div>
+                  <div class="col-6">
+                     <div class="form-group">
+                        <label>Veículo</label>
+                        <input style="text-transform: uppercase;" type="text" class="form-control" name="veiculo" id="veiculo">
 
                      </div>
-                     <div class="col-6">
 
-                        <label>Placa</label>
-                        <input style="text-transform: uppercase;" class="form-control" name="placa" id="placa">
+                  </div>
+                  <div class="col-6">
+
+                     <label>Placa</label>
+                     <input style="text-transform: uppercase;" class="form-control" name="placa" id="placa">
+
+                  </div>
+
+                  <div class="col-6">
+
+                     <label>Mão de obra</label>
+                     <input style="text-transform: uppercase;" class="form-control" name="maobra" id="maobra">
+
+                  </div>
+
+                  <div class="col-6">
+                     
+                        <label>Mecânicos</label>
+                        <select class="form-control select2bs4" style="width: 100%;" name="mecanicos_id" id="mecanicos_id">
+
+                          
+                           <?php
+
+                           foreach ($mecanicos as $item) {
+                              echo '<option value="' . $item->id . '">' . $item->nome . '</option>';
+                           }
+                           ?>
+
+                        </select>
 
                      </div>
 
@@ -462,31 +514,31 @@ foreach ($paginas as $key => $pagina) {
                      <div class="col-2">
                         <div class="form-group">
                            <label>Dinheiro</label>
-                           <input placeholder="R$ 0,00" type="text" class="form-control" name="dinheiro" id="dinheiro22">
+                           <input type="text" class="form-control" name="dinheiro" id="dinheiro22">
                         </div>
                      </div>
                      <div class="col-2">
                         <div class="form-group">
                            <label>Crédito</label>
-                           <input  placeholder="R$ 0,00"  type="text" class="form-control" name="cartao" id="cartao22">
+                           <input type="text" class="form-control" name="cartao" id="cartao22">
                         </div>
                      </div>
                      <div class="col-2">
                         <div class="form-group">
                            <label>Débito</label>
-                           <input  placeholder="R$ 0,00"  type="text" class="form-control" name="debito" id="debito22">
+                           <input type="text" class="form-control" name="debito" id="debito22">
                         </div>
                      </div>
                      <div class="col-3">
                         <div class="form-group">
                            <label>Pix</label>
-                           <input  placeholder="R$ 0,00"  type="text" class="form-control" name="pix" id="pix22">
+                           <input type="text" class="form-control" name="pix" id="pix22">
                         </div>
                      </div>
                      <div class="col-3">
                         <div class="form-group">
                            <label>Transferência</label>
-                           <input  placeholder="R$ 0,00"  type="text" class="form-control" name="transferencia" id="transferencia22">
+                           <input type="text" class="form-control" name="transferencia" id="transferencia22">
                         </div>
                      </div>
 
@@ -534,21 +586,21 @@ foreach ($paginas as $key => $pagina) {
                      </div>
                      <div class="col-4">
                         <div class="form-group">
-                        <label>Observação</label>
+                           <label>Observação</label>
                            <textarea class="form-control" aria-label="With textarea" name="descricao" id="descricao"></textarea>
                         </div>
                      </div>
 
                   </div>
 
-       
+
+               </div>
+               <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                  <button type="submit" class="btn btn-primary">Salvar
+                  </button>
+               </div>
             </div>
-            <div class="modal-footer justify-content-between">
-               <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-               <button type="submit" class="btn btn-primary">Salvar
-               </button>
-       </div>
-         </div>
       </form>
       <!-- /.modal-content -->
    </div>

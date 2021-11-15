@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11-Nov-2021 às 21:02
--- Versão do servidor: 10.4.18-MariaDB
--- versão do PHP: 7.3.28
+-- Tempo de geração: 15-Nov-2021 às 23:42
+-- Versão do servidor: 10.4.17-MariaDB
+-- versão do PHP: 7.4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -61,9 +61,7 @@ CREATE TABLE `caixa` (
 --
 
 INSERT INTO `caixa` (`id`, `data`, `valor`, `forma_pagamento_id`, `usuarios_id`) VALUES
-(2, '2021-11-09 15:28:15', '367.00', 2, 0),
-(3, '2021-11-10 18:26:16', '200.00', 2, 0),
-(4, '2021-11-10 18:55:42', '352.00', 2, 0);
+(6, '2021-11-14 15:46:00', '100.00', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -184,15 +182,8 @@ CREATE TABLE `maobra` (
   `servico` varchar(45) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `mecanicos_id` int(11) NOT NULL,
-  `movimentacoes_id` int(11) NOT NULL
+  `caixa_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `maobra`
---
-
-INSERT INTO `maobra` (`id`, `data`, `cartao`, `dinheiro`, `debito`, `pix`, `transferencia`, `tipo`, `veiculo`, `placa`, `descricao`, `servico`, `status`, `mecanicos_id`, `movimentacoes_id`) VALUES
-(99, '2021-11-11 19:05:26', '0.00', '200.00', '0.00', '0.00', '0.00', 0, 'CORSA', 'HOT-2323', 'MÃO DE OBRA', 'SERVICOS MECANICOS', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -220,7 +211,8 @@ INSERT INTO `mecanicos` (`id`, `nome`) VALUES
 (8, 'NETO'),
 (9, 'VIANA'),
 (10, 'ROBSON'),
-(11, 'MATHEUS JUNIOR');
+(11, 'MATHEUS JUNIOR'),
+(14, 'NENHUM');
 
 -- --------------------------------------------------------
 
@@ -244,7 +236,6 @@ CREATE TABLE `movimentacoes` (
   `catdespesas_id` int(11) NOT NULL,
   `caixa_id` int(11) NOT NULL,
   `mecanicos_id` int(11) NOT NULL,
-  `movimentacoescol` varchar(45) DEFAULT NULL,
   `maobra` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -252,45 +243,9 @@ CREATE TABLE `movimentacoes` (
 -- Extraindo dados da tabela `movimentacoes`
 --
 
-INSERT INTO `movimentacoes` (`id`, `data`, `cartao`, `dinheiro`, `debito`, `pix`, `transferencia`, `tipo`, `veiculo`, `placa`, `descricao`, `status`, `catdespesas_id`, `caixa_id`, `mecanicos_id`, `movimentacoescol`, `maobra`) VALUES
-(61, '2021-11-09 03:00:00', '0.00', '144.00', '0.00', '0.00', '0.00', 0, '', '', 'compra de produtos p/loja', 1, 37, 2, 0, NULL, NULL),
-(62, '2021-11-09 03:00:00', '0.00', '330.00', '0.00', '0.00', '0.00', 0, '', '', 'Refeição funciários', 1, 34, 2, 0, NULL, NULL),
-(63, '2021-11-09 03:00:00', '0.00', '20.00', '0.00', '0.00', '0.00', 0, '', '', '', 1, 35, 2, 0, NULL, NULL),
-(64, '2021-11-09 03:00:00', '0.00', '12.50', '0.00', '0.00', '0.00', 0, '', '', '', 1, 35, 2, 0, NULL, NULL),
-(65, '2021-11-09 03:00:00', '0.00', '17.94', '0.00', '0.00', '0.00', 0, '', '', '', 1, 37, 2, 0, NULL, NULL),
-(66, '2021-11-09 03:00:00', '0.00', '90.00', '0.00', '0.00', '0.00', 0, '', '', '', 1, 37, 2, 0, NULL, NULL),
-(67, '2021-11-09 03:00:00', '80.00', '0.00', '0.00', '0.00', '0.00', 1, 'fiesta', 'HOT-2356', '', 1, 23, 2, 0, NULL, NULL),
-(68, '2021-11-09 03:00:00', '1240.00', '0.00', '0.00', '0.00', '0.00', 1, 'CELTA', 'HOS-8574', '', 1, 27, 2, 0, NULL, NULL),
-(69, '2021-11-09 03:00:00', '790.00', '0.00', '0.00', '0.00', '0.00', 1, 'CELTA', 'HOS-8574', '', 1, 27, 2, 0, NULL, NULL),
-(70, '2021-11-09 03:00:00', '200.00', '0.00', '0.00', '150.00', '0.00', 1, 'cobalt', 'HOS-8565', '', 1, 29, 2, 0, NULL, NULL),
-(71, '2021-11-09 03:00:00', '0.00', '1150.00', '0.00', '0.00', '0.00', 1, 'cruzer', 'NHU-8956', '', 1, 27, 2, 0, NULL, NULL),
-(72, '2021-11-09 03:00:00', '0.00', '0.00', '220.00', '0.00', '0.00', 1, 'l-200', 'NHU-7742', '', 1, 29, 2, 0, NULL, NULL),
-(73, '2021-11-09 03:00:00', '0.00', '0.00', '185.00', '0.00', '0.00', 1, 'hb20', 'Hot-2543', '', 1, 29, 2, 0, NULL, NULL),
-(74, '2021-11-09 03:00:00', '0.00', '0.00', '140.00', '0.00', '0.00', 1, 'siena', 'NHU-7343', '', 1, 40, 2, 0, NULL, NULL),
-(75, '2021-11-09 03:00:00', '0.00', '0.00', '140.00', '0.00', '0.00', 1, 'SIENA', 'hpl-5245', '', 1, 40, 2, 0, NULL, NULL),
-(76, '2021-11-09 03:00:00', '100.00', '0.00', '0.00', '0.00', '0.00', 1, 'ONIX', 'HOR-8524', '', 1, 28, 2, 0, NULL, NULL),
-(77, '2021-11-09 03:00:00', '215.00', '0.00', '0.00', '0.00', '0.00', 1, 'ONIX', 'HOS-8565', '', 1, 25, 2, 0, NULL, NULL),
-(78, '2021-11-09 03:00:00', '0.00', '40.00', '0.00', '145.00', '0.00', 1, 'CLIO', 'HOS-8565', '', 1, 25, 2, 0, NULL, NULL),
-(79, '2021-11-09 03:00:00', '450.00', '0.00', '0.00', '0.00', '0.00', 1, 'hb20', 'Hot-2953', '', 1, 26, 2, 0, NULL, NULL),
-(80, '2021-11-09 03:00:00', '0.00', '130.00', '0.00', '0.00', '0.00', 1, 'PALIO', 'NHU-8956', '', 1, 27, 2, 0, NULL, NULL),
-(81, '2021-11-09 03:00:00', '0.00', '60.00', '0.00', '0.00', '0.00', 1, 'COROLLA', 'NHU-7742', '', 1, 15, 2, 0, NULL, NULL),
-(82, '2021-11-09 03:00:00', '0.00', '0.00', '425.00', '0.00', '0.00', 1, 'DUSTER', 'HOT-2356', '', 1, 27, 2, 0, NULL, NULL),
-(83, '2021-11-09 03:00:00', '595.00', '0.00', '0.00', '0.00', '0.00', 1, 'FIT', 'HOR-8524', '', 1, 23, 2, 0, NULL, NULL),
-(84, '2021-11-09 03:00:00', '0.00', '0.00', '0.00', '1690.00', '0.00', 1, 'HILUX', 'NHU-9090', '', 1, 27, 2, 0, NULL, NULL),
-(85, '2021-11-09 03:00:00', '0.00', '0.00', '0.00', '40.00', '0.00', 1, 'ONIX JOY', 'NHU-8956', '', 1, 23, 2, 0, NULL, NULL),
-(86, '2021-11-09 03:00:00', '0.00', '0.00', '590.00', '0.00', '0.00', 1, 'PAJEIRO', 'NHU-5525', '', 1, 27, 2, 0, NULL, NULL),
-(87, '2021-11-09 03:00:00', '1380.00', '0.00', '0.00', '0.00', '0.00', 1, 'FIESTA', 'NHU-9090', '', 1, 27, 2, 0, NULL, NULL),
-(88, '2021-11-09 03:00:00', '0.00', '800.00', '0.00', '0.00', '0.00', 0, '', '', '', 1, 38, 2, 0, NULL, NULL),
-(89, '2021-11-10 18:27:07', '0.00', '250.00', '0.00', '0.00', '0.00', 1, 'fiat uno', 'HOS-8565', '', 1, 23, 3, 0, NULL, NULL),
-(90, '2021-11-10 18:27:38', '0.00', '250.00', '0.00', '0.00', '0.00', 1, 'siena', 'hpl-5245', '', 1, 30, 3, 0, NULL, NULL),
-(91, '2021-11-10 18:28:09', '0.00', '100.00', '0.00', '0.00', '0.00', 0, '', '', '', 1, 35, 3, 0, NULL, NULL),
-(92, '2021-11-10 18:28:26', '0.00', '50.00', '0.00', '0.00', '0.00', 0, '', '', '', 1, 35, 3, 0, NULL, NULL),
-(93, '2021-11-10 18:56:18', '0.00', '175.00', '0.00', '0.00', '0.00', 0, '', '', '', 1, 35, 4, 0, NULL, NULL),
-(94, '2021-11-10 18:57:31', '0.00', '20.00', '0.00', '0.00', '0.00', 0, '', '', '', 1, 34, 4, 0, NULL, NULL),
-(95, '2021-11-10 18:58:48', '0.00', '240.00', '0.00', '0.00', '0.00', 1, 'PRISMA', 'NHU-8956', '', 1, 27, 4, 0, NULL, NULL),
-(96, '2021-11-10 18:59:17', '0.00', '60.00', '0.00', '0.00', '0.00', 1, 'OROCH', 'NHU-8956', '', 1, 11, 4, 0, NULL, NULL),
-(97, '2021-11-10 18:59:45', '0.00', '750.00', '0.00', '0.00', '0.00', 1, 'PALIO', 'NHU-8956', '', 1, 27, 4, 0, NULL, NULL),
-(98, '2021-11-10 19:00:10', '0.00', '150.00', '0.00', '0.00', '0.00', 1, 'YARIS', 'NHU-5525', '', 1, 27, 4, 0, NULL, NULL);
+INSERT INTO `movimentacoes` (`id`, `data`, `cartao`, `dinheiro`, `debito`, `pix`, `transferencia`, `tipo`, `veiculo`, `placa`, `descricao`, `status`, `catdespesas_id`, `caixa_id`, `mecanicos_id`, `maobra`) VALUES
+(117, '2021-11-14 15:46:35', '30.00', '20.00', '50.00', '40.00', '60.00', 1, 'fiesta hatch', 'otc-9090', 'oook', 1, 1, 6, 1, '100.00'),
+(118, '2021-11-15 22:39:52', '0.00', '10.00', '0.00', '0.00', '0.00', 1, 'fiesta hatch', 'otc-9090', '', 1, 1, 6, 14, '0.00');
 
 -- --------------------------------------------------------
 
@@ -358,7 +313,7 @@ ALTER TABLE `forma_pagamento`
 ALTER TABLE `maobra`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_movimentacoes_copy1_mecanicos1_idx` (`mecanicos_id`),
-  ADD KEY `fk_maobra_movimentacoes1_idx` (`movimentacoes_id`);
+  ADD KEY `fk_maobra_caixa_idx` (`caixa_id`);
 
 --
 -- Índices para tabela `mecanicos`
@@ -398,7 +353,7 @@ ALTER TABLE `acessos`
 -- AUTO_INCREMENT de tabela `caixa`
 --
 ALTER TABLE `caixa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `cargos`
@@ -428,13 +383,13 @@ ALTER TABLE `maobra`
 -- AUTO_INCREMENT de tabela `mecanicos`
 --
 ALTER TABLE `mecanicos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `movimentacoes`
 --
 ALTER TABLE `movimentacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
@@ -447,33 +402,10 @@ ALTER TABLE `usuarios`
 --
 
 --
--- Limitadores para a tabela `caixa`
---
-ALTER TABLE `caixa`
-  ADD CONSTRAINT `fk_caixa_forma_pagamento1` FOREIGN KEY (`forma_pagamento_id`) REFERENCES `forma_pagamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_caixa_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Limitadores para a tabela `maobra`
 --
 ALTER TABLE `maobra`
-  ADD CONSTRAINT `fk_maobra_movimentacoes1` FOREIGN KEY (`movimentacoes_id`) REFERENCES `movimentacoes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_movimentacoes_copy1_mecanicos1` FOREIGN KEY (`mecanicos_id`) REFERENCES `mecanicos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `movimentacoes`
---
-ALTER TABLE `movimentacoes`
-  ADD CONSTRAINT `fk_movimentacoes_caixa1` FOREIGN KEY (`caixa_id`) REFERENCES `caixa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_movimentacoes_catdespesas1` FOREIGN KEY (`catdespesas_id`) REFERENCES `catdespesas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_movimentacoes_mecanicos1` FOREIGN KEY (`mecanicos_id`) REFERENCES `mecanicos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Limitadores para a tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD CONSTRAINT `fk_usuarios_acessos1` FOREIGN KEY (`acessos_id`) REFERENCES `acessos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_usuarios_cargos` FOREIGN KEY (`cargos_id`) REFERENCES `cargos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_maobra_caixa` FOREIGN KEY (`caixa_id`) REFERENCES `caixa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

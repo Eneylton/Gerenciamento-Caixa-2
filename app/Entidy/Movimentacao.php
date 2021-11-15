@@ -20,7 +20,9 @@ class Movimentacao
     public $descricao;
     public $status;
     public $catdespesas_id;
+    public $mecanicos_id;
     public $caixa_id;
+    public $maobra;
 
     public function cadastar()
     {
@@ -41,6 +43,8 @@ class Movimentacao
             'descricao'              => $this->descricao,
             'status'                 => $this->status,
             'catdespesas_id'         => $this->catdespesas_id,
+            'mecanicos_id'           => $this->mecanicos_id,
+            'maobra'                 => $this->maobra,
             'caixa_id'               => $this->caixa_id
 
         ]);
@@ -64,6 +68,8 @@ class Movimentacao
             'descricao'              => $this->descricao,
             'status'                 => $this->status,
             'catdespesas_id'         => $this->catdespesas_id,
+            'mecanicos_id'           => $this->mecanicos_id,
+            'maobra'                 => $this->maobra,
             'caixa_id'               => $this->caixa_id
         ]);
     }

@@ -39,6 +39,17 @@ if(isset($_POST['idcaixa'])){
     $preco5             = str_replace(",", ".",$transf2);
 
 
+    $maobra1            = $_POST['maobra'];
+    $maobra2            = str_replace(".", "", $maobra1);
+    $maobra5            = str_replace(",", ".",$maobra2);
+
+    if(empty($_POST['mecanicos_id'])){
+      $mec = 14;
+    }else{
+      $mec = $_POST['mecanicos_id'];
+    }
+
+
     $item = new Movimentacao;
     $item->catdespesas_id = $_POST['catdespesas_id'];
     $item->status = $_POST['status'];
@@ -52,6 +63,8 @@ if(isset($_POST['idcaixa'])){
     $item->caixa_id = $_POST['idcaixa'];
     $item->veiculo = $_POST['veiculo'];
     $item->placa = $_POST['placa'];
+    $item->mecanicos_id = $mec;
+    $item->maobra =  $maobra5;
     $item->cadastar();
 
     header('location: movimentacao-list.php?id='.$_POST['idcaixa']);
