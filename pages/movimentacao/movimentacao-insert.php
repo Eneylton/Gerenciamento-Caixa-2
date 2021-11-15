@@ -53,11 +53,12 @@ if(isset($_POST['idcaixa'])){
 
     if(!empty($_POST['maobra'])){
 
-      if($_POST['dinheiro']){
+      if( $_POST['dinheiro'] || $_POST['credito']){
 
         $obra = new Maobra;
 
         $obra->dinheiro = $preco1;
+        $obra->cartao = $preco2;
         $obra->caixa_id = $_POST['idcaixa'];
         $obra->veiculo = $_POST['veiculo'];
         $obra->placa = $_POST['placa'];
@@ -68,6 +69,10 @@ if(isset($_POST['idcaixa'])){
         $obra->tipo = 0;
         $obra->cadastar();
         
+      }elseif ($_POST['dinheiro'] || $_POST['credito'] ) {
+        echo "ok";
+      }{
+
       }
     }
 
