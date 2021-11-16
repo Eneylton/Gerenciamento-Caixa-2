@@ -53,12 +53,16 @@ if(isset($_POST['idcaixa'])){
 
     if(!empty($_POST['maobra'])){
 
-      if( $_POST['dinheiro'] || $_POST['credito']){
+      $valor = ($maobra5 / 2);
+
+      if( $_POST['dinheiro'] && $_POST['credito']){
+
+        $valor2 = ($valor  / 2);
 
         $obra = new Maobra;
 
-        $obra->dinheiro = $preco1;
-        $obra->cartao = $preco2;
+        $obra->dinheiro = $valor2;
+        $obra->cartao = $valor2;
         $obra->caixa_id = $_POST['idcaixa'];
         $obra->veiculo = $_POST['veiculo'];
         $obra->placa = $_POST['placa'];
@@ -69,9 +73,230 @@ if(isset($_POST['idcaixa'])){
         $obra->tipo = 0;
         $obra->cadastar();
         
-      }elseif ($_POST['dinheiro'] || $_POST['credito'] ) {
-        echo "ok";
-      }{
+      }elseif ($_POST['dinheiro'] && $_POST['debito'] ) {
+
+        $valor2 = ($valor  / 2);
+        
+        $obra = new Maobra;
+
+        $obra->dinheiro = $valor2;
+        $obra->debito = $valor2;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+
+      }elseif ($_POST['dinheiro'] && $_POST['pix'] ) {
+
+        $valor2 = ($valor  / 2);
+
+        $obra = new Maobra;
+
+        $obra->dinheiro = $valor2;
+        $obra->pix = $valor2;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+
+      }elseif ($_POST['dinheiro'] && $_POST['transferencia'] ) {
+
+        $valor2 = ($valor  / 2);
+
+        $obra = new Maobra;
+
+        $obra->dinheiro = $valor2;
+        $obra->transferencia = $valor2;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+
+      }elseif ($_POST['credito'] && $_POST['debito'] ) {
+
+        $valor2 = ($valor  / 2);
+
+        $obra = new Maobra;
+
+        $obra->cartao = $valor2;
+        $obra->debito = $valor2;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+
+      }elseif ($_POST['credito'] && $_POST['pix'] ) {
+
+        $valor2 = ($valor  / 2);
+
+        $obra = new Maobra;
+
+        $obra->cartao = $valor2;
+        $obra->pix = $valor2;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+       
+      }elseif ($_POST['credito'] && $_POST['transferencia'] ) {
+
+        $valor2 = ($valor  / 2);
+
+        $obra = new Maobra;
+
+        $obra->cartao = $valor2;
+        $obra->transferencia = $valor2;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+
+      }elseif ($_POST['debito'] && $_POST['pix'] ) {
+
+        $valor2 = ($valor  / 2);
+
+        $obra = new Maobra;
+
+        $obra->debito = $valor2;
+        $obra->pix = $valor2;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+
+      }elseif ($_POST['debito'] && $_POST['transferencia'] ) {
+
+        $valor2 = ($valor  / 2);
+
+        $obra = new Maobra;
+
+        $obra->debito = $valor2;
+        $obra->transferencia = $valor2;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+
+      }elseif ($_POST['dinheiro']) {
+
+        $obra = new Maobra;
+
+        $obra->dinheiro = $valor;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+
+      }elseif ($_POST['credito']) {
+
+        $obra = new Maobra;
+
+        $obra->credito = $valor;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+
+      }elseif ($_POST['debito']) {
+
+        $obra = new Maobra;
+
+        $obra->debito = $valor;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+
+      }elseif ($_POST['pix']) {
+
+        $obra = new Maobra;
+
+        $obra->pix = $valor;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+
+      }elseif ($_POST['transferencia']) {
+
+        $obra = new Maobra;
+
+        $obra->transferencia = $valor;
+        $obra->caixa_id = $_POST['idcaixa'];
+        $obra->veiculo = $_POST['veiculo'];
+        $obra->placa = $_POST['placa'];
+        $obra->descricao = $_POST['descricao'];
+        $obra->mecanicos_id = $mec;
+        $obra->servico = "SERVIÇOS MECÊNANICOS";
+        $obra->status = 0;
+        $obra->tipo = 0;
+        $obra->cadastar();
+
+      }
+      
+      
+      
+      {
 
       }
     }

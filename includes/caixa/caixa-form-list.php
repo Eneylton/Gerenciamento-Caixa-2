@@ -11,10 +11,10 @@ foreach ($listar as $item) {
                       <td style="text-transform:uppercase; width:300px"> <h3><span class="badge badge-pill badge-warning">
                       <i class="fa fa-clock" aria-hidden="true"></i> &nbsp; &nbsp;' .date('d/m/Y à\s H:i:s ', strtotime($item->data)). '</span></h3> </td>
                      
-                      <td style="text-transform:uppercase; width:400px"> <h3><span class="badge badge-pill badge-success">
+                      <td style="text-transform:uppercase; width:100px"> <h3><span class="badge badge-pill badge-success">
                       <i class="fas fa-check"></i> &nbsp;' . $item->pagamento . '</span></h3> </td>
 
-                      <td style="text-transform:uppercase; width:400px;text-align:center"> <h3><span class="badge badge-pill badge-secondary">
+                      <td style="text-transform:uppercase; width:100px;text-align:center"> <h3><span class="badge badge-pill badge-secondary">
                       <i class="fas fa-plus-circle"></i>&nbsp; R$ &nbsp;' . number_format($item->valor,"2",",",".") . '</span></h3> </td>
                     
                       <td style="text-align: center;">
@@ -22,7 +22,14 @@ foreach ($listar as $item) {
                       <a href="../movimentacao/movimentacao-list.php?id=' . $item->id . '">
                       <button type="button" class="btn btn-primary"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> &nbsp;  &nbsp;  INICIAR</button>
                       </a>
-                        
+                     
+                      &nbsp;
+
+                      <a href="../maobra/maobra-detalhe.php?id=' . $item->id . '">
+                      <button type="button" class="btn btn-default"><i class="fas fa-wrench"></i> &nbsp;  &nbsp;  SERVIÇOS</button>
+                      </a>
+                     
+                      &nbsp;
                       
                       <button type="submit" class="btn btn-success editbtn" > <i class="fas fa-paint-brush"></i> </button>
                       &nbsp;

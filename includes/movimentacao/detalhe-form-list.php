@@ -52,7 +52,7 @@ foreach ($saida as $item2) {
                       <td style="text-transform:uppercase; text-align:center"> <h5><span class="badge badge-pill badge-info">r$ ' . number_format($item2->debito,"2",",",".") . '</span></h5> </td>
                       <td style="text-transform:uppercase; text-align:center"> <h5><span class="badge badge-pill badge-info">r$ ' . number_format($item2->pix,"2",",",".") . '</span></h5> </td>
                       <td style="text-transform:uppercase; text-align:center"> <h5><span class="badge badge-pill badge-info">r$ ' . number_format($item2->transferencia,"2",",",".") . '</span></h5> </td>
-                      <td style="text-transform:uppercase; text-align:center"> <h5><span class="badge badge-pill badge-dark">R$  '.   number_format($subtotal2,"2",",",".").'</span></h5> </td>
+                      <td style="text-transform:uppercase; text-align:center"> <h5><span class="badge badge-pill badge-dark">R$  '. number_format($subtotal2,"2",",",".").'</span></h5> </td>
                       </tr>
 
                       ';

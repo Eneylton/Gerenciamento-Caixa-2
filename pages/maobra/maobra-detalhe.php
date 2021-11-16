@@ -2,13 +2,15 @@
 require __DIR__ . '../../../vendor/autoload.php';
 
 use App\Entidy\Caixa;
-use App\Entidy\Movimentacao;
+use App\Entidy\Maobra;
 use App\Session\Login;
 
 define('TITLE','Movimentações financeiras');
 define('BRAND','Financeiro');
 
 Login::requireLogin();
+
+$total_producao  = 0;
 
 if(isset($_GET['id'])){
 
@@ -20,27 +22,51 @@ if(isset($_GET['id'])){
  
 }
 
-$entrada = Movimentacao :: getList('m.data as data, SUM(m.dinheiro) AS dinheiro,
-SUM(m.cartao) AS cartao,
+$pagar = Maobra :: getList('SUM(m.dinheiro) AS dinheiro,
+SUM(m.cartao) AS credito,
 SUM(m.debito) AS debito,
 SUM(m.pix) AS pix,
-SUM(m.transferencia) AS transferencia',' movimentacoes AS m','m.tipo = 1 AND m.caixa_id ='.$idcaixa,null,null);
+SUM(m.transferencia) AS transferencia',' maobra AS m','m.tipo = 0 AND m.caixa_id ='.$idcaixa,null,null);
 
-$saida = Movimentacao :: getList('m.data as data, SUM(m.dinheiro) AS dinheiro,
-SUM(m.cartao) AS cartao,
-SUM(m.debito) AS debito,
-SUM(m.pix) AS pix,
-SUM(m.transferencia) AS transferencia',' movimentacoes AS m','m.tipo = 0 AND m.caixa_id ='.$idcaixa,null,null);
+$obra = Maobra :: getList('m.data AS data,
+m.dinheiro AS dinheiro,
+m.cartao AS cartao,
+m.debito AS debito,
+m.pix AS pix,
+m.transferencia AS transferencia,
+m.servico AS servicos,
+mc.nome AS mecanico','maobra AS m
+INNER JOIN
+mecanicos AS mc ON (m.mecanicos_id = mc.id)','m.tipo = 0 AND m.caixa_id ='.$idcaixa,null,null);
 
-$caixa  = Caixa :: getID('*','caixa',$idcaixa,null,null);
+$detalhes = Maobra :: getList('m.data AS data,
+m.placa AS placa,
+m.veiculo as veiculo,
+mc.nome AS mecanico,
+m.servico AS servico,
+m.dinheiro AS dinheiro,
+m.debito AS debito,
+m.cartao AS cartao,
+m.pix AS pix,
+m.transferencia AS transferencia',' maobra AS m
+INNER JOIN
+mecanicos AS mc ON (m.mecanicos_id = mc.id)','m.caixa_id ='.$idcaixa,null,null);
 
-$valor_caixa = $caixa->valor;
+$producao = Maobra :: getList(' DATE_FORMAT(m.data, "%d/%m") AS data, sum(m.dinheiro) as total','maobra as m
+GROUP BY m.data',null,null);
+
+foreach ($producao as $item) {
+
+    $total_producao += $item->total;
+
+}
+
 
 include __DIR__ . '../../../includes/layout/header.php';
 include __DIR__ . '../../../includes/layout/top.php';
 include __DIR__ . '../../../includes/layout/menu.php';
 include __DIR__ . '../../../includes/layout/content.php';
-include __DIR__ . '../../../includes/movimentacao/detalhe-form-list.php';
+include __DIR__ . '../../../includes/maobra/detalhe-form-list.php';
 include __DIR__ . '../../../includes/layout/footer.php';
 
 ?>
@@ -147,20 +173,20 @@ var myChart = new Chart(ctx, {
 
             <?php
            
-            foreach ($entrada as $item) {
+            foreach ($producao as $item) {
            
-                echo "'".date('d / M', strtotime($item->data))."',";
+                echo "'".$item->data."',";
             }
              
             ?>
         ]
         ,
         datasets: [{
-            label: '• ENTRADA •',
+            label: '• PRODUÇÃO DIÁRIA •',
             data: [
                 <?php
-            foreach ($entrada as $item) {
-                echo "'".$item->dinheiro."',";
+            foreach ($producao as $item) {
+                echo "'".$item->total."',";
             }
              
             ?>
@@ -233,90 +259,6 @@ var myChart = new Chart(ctx, {
                 '#6fe633a8',
                 '#6fe633a8',
                 '#6fe633a8'
-             
-            ],
-            borderWidth: 1
-        },
-        
-        {
-            label: '• SAIDA •',
-            data: [
-                
-                
-                <?php
-            foreach ($saida as $item) {
-                echo "'".$item->dinheiro."',";
-            }
-             
-            ?>
-            ],
-            backgroundColor: [
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000'
-            ],
-            borderColor: [
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000',
-                '#ff0000'
              
             ],
             borderWidth: 1

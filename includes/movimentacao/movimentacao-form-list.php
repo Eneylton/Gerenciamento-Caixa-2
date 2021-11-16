@@ -9,6 +9,7 @@ $total_geral = 0;
 $saida = 0;
 $caixa = 0;
 $saldo = 0;
+$total_diaria = 0;
 
 $resultados = '';
 $veiculo = '';
@@ -179,8 +180,8 @@ foreach ($paginas as $key => $pagina) {
                               <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"> <i class="fas fa-plus"></i> &nbsp; Adicionar</button>
 
                               <a href="movimentacao-detalhe.php?id=<?= $id_caixa ?>">
-                                 <button style="margin-right:50px; font-weight:600; font-size:x-large" type="submit" class="<?= $total_diaria <= 0 ? 'btn btn-danger' : 'btn btn-default' ?> float-right btn-lg"> <i class="fa fa-print" aria-hidden="true"></i>
-                                    MOVIMENTAÇÕES </button>
+                                 <button style="margin-right:50px; font-weight:600; font-size:x-large" type="submit" class="<?= $total_diaria <= 0 ? 'btn btn-danger' : 'btn btn-default' ?> float-right btn-lg"> <i class="fas fa-sync"></i>
+                                    FECHAMENTO DE CAIXA </button>
                               </a>
 
                               <button style="margin-right:50px; font-weight:600; font-size:x-large" type="submit" class="<?= $saldo <= 0 ? 'btn btn-danger' : 'btn btn-success' ?> float-right btn-lg"><i class="fa fa-arrow-right" aria-hidden="true"></i>
