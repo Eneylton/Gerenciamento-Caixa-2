@@ -35,10 +35,16 @@ if(!$value instanceof Caixa){
 
 
 
+
+
 if(isset($_GET['valor'])){
+
+    $vl1            = $_GET['valor'];
+    $vl2            = str_replace(".", "", $vl1);
+    $vl3            = str_replace(",", ".",$vl2);
     
-    $value->valor = $GET['valor'];
-    $value->forma_pagamento_id = $GET['forma_pagamento_id'];
+    $value->valor = $vl3;
+    $value->forma_pagamento_id = $_GET['forma_pagamento_id'];
     $value-> atualizar();
 
     header('location: caixa-list.php?status=edit');

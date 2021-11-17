@@ -20,8 +20,12 @@ Login::requireLogin();
 
 if(isset($_POST['valor'])){
 
+        $vl1            = $_POST['valor'];
+        $vl2            = str_replace(".", "", $vl1);
+        $vl3            = str_replace(",", ".",$vl2);
+
         $item = new Caixa;
-        $item->valor = $_POST['valor'];
+        $item->valor = $vl3;
         $item->forma_pagamento_id = $_POST['forma_pagamento_id'];
         $item->cadastar();
 

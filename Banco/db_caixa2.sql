@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15-Nov-2021 às 23:42
+-- Tempo de geração: 17-Nov-2021 às 02:21
 -- Versão do servidor: 10.4.17-MariaDB
 -- versão do PHP: 7.4.14
 
@@ -61,7 +61,7 @@ CREATE TABLE `caixa` (
 --
 
 INSERT INTO `caixa` (`id`, `data`, `valor`, `forma_pagamento_id`, `usuarios_id`) VALUES
-(6, '2021-11-14 15:46:00', '100.00', 2, 0);
+(7, '2021-11-17 00:39:20', '280.00', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -169,7 +169,7 @@ INSERT INTO `forma_pagamento` (`id`, `nome`) VALUES
 
 CREATE TABLE `maobra` (
   `id` int(11) NOT NULL,
-  `data` timestamp NULL DEFAULT current_timestamp(),
+  `data` date DEFAULT current_timestamp(),
   `cartao` decimal(10,2) DEFAULT NULL,
   `dinheiro` decimal(10,2) DEFAULT NULL,
   `debito` decimal(10,2) DEFAULT NULL,
@@ -184,6 +184,13 @@ CREATE TABLE `maobra` (
   `mecanicos_id` int(11) NOT NULL,
   `caixa_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `maobra`
+--
+
+INSERT INTO `maobra` (`id`, `data`, `cartao`, `dinheiro`, `debito`, `pix`, `transferencia`, `tipo`, `veiculo`, `placa`, `descricao`, `servico`, `status`, `mecanicos_id`, `caixa_id`) VALUES
+(104, '2021-11-16', NULL, '50.00', '50.00', NULL, NULL, 0, 'Siena', 'hop-9090', '', 'SERVIÇOS MECÊNANICOS', 0, 11, 7);
 
 -- --------------------------------------------------------
 
@@ -244,8 +251,8 @@ CREATE TABLE `movimentacoes` (
 --
 
 INSERT INTO `movimentacoes` (`id`, `data`, `cartao`, `dinheiro`, `debito`, `pix`, `transferencia`, `tipo`, `veiculo`, `placa`, `descricao`, `status`, `catdespesas_id`, `caixa_id`, `mecanicos_id`, `maobra`) VALUES
-(117, '2021-11-14 15:46:35', '30.00', '20.00', '50.00', '40.00', '60.00', 1, 'fiesta hatch', 'otc-9090', 'oook', 1, 1, 6, 1, '100.00'),
-(118, '2021-11-15 22:39:52', '0.00', '10.00', '0.00', '0.00', '0.00', 1, 'fiesta hatch', 'otc-9090', '', 1, 1, 6, 14, '0.00');
+(122, '2021-11-17 01:17:47', '0.00', '800.00', '200.00', '0.00', '0.00', 1, 'Siena', 'hop-9090', '', 1, 15, 7, 11, '200.00'),
+(123, '2021-11-17 01:18:40', '0.00', '20.00', '0.00', '0.00', '0.00', 0, '', '', 'Compra de pão ', 1, 34, 7, 14, '0.00');
 
 -- --------------------------------------------------------
 
@@ -353,7 +360,7 @@ ALTER TABLE `acessos`
 -- AUTO_INCREMENT de tabela `caixa`
 --
 ALTER TABLE `caixa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `cargos`
@@ -377,7 +384,7 @@ ALTER TABLE `forma_pagamento`
 -- AUTO_INCREMENT de tabela `maobra`
 --
 ALTER TABLE `maobra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT de tabela `mecanicos`
@@ -389,7 +396,7 @@ ALTER TABLE `mecanicos`
 -- AUTO_INCREMENT de tabela `movimentacoes`
 --
 ALTER TABLE `movimentacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
