@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Nov-2021 às 02:21
+-- Tempo de geração: 17-Nov-2021 às 18:58
 -- Versão do servidor: 10.4.17-MariaDB
 -- versão do PHP: 7.4.14
 
@@ -61,7 +61,7 @@ CREATE TABLE `caixa` (
 --
 
 INSERT INTO `caixa` (`id`, `data`, `valor`, `forma_pagamento_id`, `usuarios_id`) VALUES
-(7, '2021-11-17 00:39:20', '280.00', 2, 0);
+(8, '2021-11-17 11:41:31', '281.00', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -135,7 +135,8 @@ INSERT INTO `catdespesas` (`id`, `nome`) VALUES
 (37, 'MERCEARIA'),
 (38, 'PAGAMENTO JEFSON'),
 (39, 'EXAMES ADM'),
-(40, 'TROCA DE ÓLEO');
+(40, 'TROCA DE ÓLEO'),
+(41, 'Manutenção e conserto');
 
 -- --------------------------------------------------------
 
@@ -190,7 +191,18 @@ CREATE TABLE `maobra` (
 --
 
 INSERT INTO `maobra` (`id`, `data`, `cartao`, `dinheiro`, `debito`, `pix`, `transferencia`, `tipo`, `veiculo`, `placa`, `descricao`, `servico`, `status`, `mecanicos_id`, `caixa_id`) VALUES
-(104, '2021-11-16', NULL, '50.00', '50.00', NULL, NULL, 0, 'Siena', 'hop-9090', '', 'SERVIÇOS MECÊNANICOS', 0, 11, 7);
+(105, '2021-11-17', NULL, NULL, '30.00', NULL, NULL, 0, 'Corolla', 'pty1c56', '', 'SERVIÇOS MECÊNANICOS', 0, 11, 8),
+(106, '2021-11-17', NULL, NULL, '75.00', NULL, NULL, 0, 'logan ', 'não informado', '', 'SERVIÇOS MECÊNANICOS', 0, 3, 8),
+(107, '2021-11-17', NULL, NULL, '25.00', NULL, NULL, 0, 'corsa classic', 'não informado', '', 'SERVIÇOS MECÊNANICOS', 0, 7, 8),
+(108, '2021-11-17', '75.00', NULL, '0.00', NULL, NULL, 0, 'sandero', 'pow-6f22', '', 'SERVIÇOS MECÊNANICOS', 0, 6, 8),
+(109, '2021-11-17', '30.00', NULL, '0.00', NULL, NULL, 0, 'ford ka ', 'pth-1550', '', 'SERVIÇOS MECÊNANICOS', 0, 10, 8),
+(110, '2021-11-17', NULL, NULL, '30.00', NULL, NULL, 0, 'Corolla', 'não informado', '', 'SERVIÇOS MECÊNANICOS', 0, 4, 8),
+(111, '2021-11-17', '75.00', NULL, '0.00', NULL, NULL, 0, 'sandero', 'pzw-6740', '', 'SERVIÇOS MECÊNANICOS', 0, 5, 8),
+(112, '2021-11-17', NULL, NULL, '25.00', NULL, NULL, 0, 'etios', 'não informado', '', 'SERVIÇOS MECÊNANICOS', 0, 7, 8),
+(114, '2021-11-17', '150.00', NULL, NULL, NULL, NULL, 0, 'teste', 'teste', '', 'SERVIÇOS MECÊNANICOS', 0, 1, 8),
+(115, '2021-11-17', NULL, NULL, '100.00', NULL, NULL, 0, 'versa', 'não informado', '', 'SERVIÇOS MECÊNANICOS', 0, 9, 8),
+(116, '2021-11-17', NULL, NULL, '25.00', NULL, NULL, 0, 'fiat cronos', 'não informado', '', 'SERVIÇOS MECÊNANICOS', 0, 10, 8),
+(117, '2021-11-17', '75.00', NULL, NULL, NULL, NULL, 0, 'corsa classic', 'não informado', '', 'SERVIÇOS MECÊNANICOS', 0, 8, 8);
 
 -- --------------------------------------------------------
 
@@ -251,8 +263,20 @@ CREATE TABLE `movimentacoes` (
 --
 
 INSERT INTO `movimentacoes` (`id`, `data`, `cartao`, `dinheiro`, `debito`, `pix`, `transferencia`, `tipo`, `veiculo`, `placa`, `descricao`, `status`, `catdespesas_id`, `caixa_id`, `mecanicos_id`, `maobra`) VALUES
-(122, '2021-11-17 01:17:47', '0.00', '800.00', '200.00', '0.00', '0.00', 1, 'Siena', 'hop-9090', '', 1, 15, 7, 11, '200.00'),
-(123, '2021-11-17 01:18:40', '0.00', '20.00', '0.00', '0.00', '0.00', 0, '', '', 'Compra de pão ', 1, 34, 7, 14, '0.00');
+(125, '2021-11-17 12:23:21', '0.00', '0.00', '60.00', '0.00', '0.00', 1, 'Corolla', 'pty1c56', '', 1, 15, 8, 11, '60.00'),
+(126, '2021-11-17 12:27:23', '160.00', '0.00', '0.00', '0.00', '0.00', 1, 'corsa classic', 'nhm-0210', '', 1, 32, 8, 4, '0.00'),
+(127, '2021-11-17 12:57:22', '230.00', '0.00', '0.00', '0.00', '0.00', 1, 'logan ', 'não informado', '', 1, 17, 8, 3, '150.00'),
+(129, '2021-11-17 13:25:00', '0.00', '0.00', '390.00', '0.00', '0.00', 1, 'corsa classic', 'não informado', '', 1, 27, 8, 7, '50.00'),
+(130, '2021-11-17 13:32:26', '195.00', '0.00', '0.00', '0.00', '0.00', 1, 'ford ka ', 'não informado', '', 1, 32, 8, 3, '0.00'),
+(132, '2021-11-17 14:13:32', '150.00', '0.00', '0.00', '0.00', '0.00', 1, 'ford ka ', 'psg-5380', '', 1, 29, 8, 3, '0.00'),
+(133, '2021-11-17 14:17:55', '790.00', '0.00', '0.00', '0.00', '0.00', 1, 'sandero', 'pow-6f22', '', 1, 27, 8, 6, '150.00'),
+(134, '2021-11-17 14:21:54', '520.00', '0.00', '0.00', '0.00', '0.00', 1, 'ford ka ', 'pth-1550', '', 1, 27, 8, 10, '60.00'),
+(135, '2021-11-17 14:27:25', '0.00', '0.00', '60.00', '0.00', '0.00', 1, 'Corolla', 'não informado', '', 1, 15, 8, 4, '60.00'),
+(136, '2021-11-17 14:31:32', '840.00', '0.00', '0.00', '0.00', '0.00', 1, 'sandero', 'pzw-6740', '', 1, 27, 8, 5, '150.00'),
+(137, '2021-11-17 14:37:30', '0.00', '0.00', '50.00', '0.00', '0.00', 1, 'etios', 'não informado', '', 1, 15, 8, 7, '50.00'),
+(141, '2021-11-17 17:41:18', '0.00', '0.00', '1400.00', '0.00', '0.00', 1, 'versa', 'não informado', '', 1, 27, 8, 9, '200.00'),
+(142, '2021-11-17 17:43:13', '0.00', '0.00', '255.00', '0.00', '0.00', 1, 'fiat cronos', 'não informado', '', 1, 3, 8, 10, '50.00'),
+(143, '2021-11-17 17:44:37', '755.00', '0.00', '0.00', '0.00', '0.00', 1, 'corsa classic', 'não informado', '', 1, 27, 8, 8, '150.00');
 
 -- --------------------------------------------------------
 
@@ -360,7 +384,7 @@ ALTER TABLE `acessos`
 -- AUTO_INCREMENT de tabela `caixa`
 --
 ALTER TABLE `caixa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `cargos`
@@ -372,7 +396,7 @@ ALTER TABLE `cargos`
 -- AUTO_INCREMENT de tabela `catdespesas`
 --
 ALTER TABLE `catdespesas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de tabela `forma_pagamento`
@@ -384,7 +408,7 @@ ALTER TABLE `forma_pagamento`
 -- AUTO_INCREMENT de tabela `maobra`
 --
 ALTER TABLE `maobra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT de tabela `mecanicos`
@@ -396,7 +420,7 @@ ALTER TABLE `mecanicos`
 -- AUTO_INCREMENT de tabela `movimentacoes`
 --
 ALTER TABLE `movimentacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`

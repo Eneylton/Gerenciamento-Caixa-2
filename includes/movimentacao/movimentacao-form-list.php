@@ -84,10 +84,10 @@ foreach ($listar as $item) {
                       
                       </td>
                     
-                      <td>' . date('d/m/Y à\s H:i:s ', strtotime($item->data)) . '</td>
-
+                      
                       <td style="text-transform: uppercase; font-weight: 600; width:500px">' . $veiculo . ' / <span style="color:#ffc266"> ' . $item->placa . ' </span></td>
                       <td style="text-transform: uppercase; font-weight: 600; width:500px">' . $item->categoria . '</td>
+                      <td>' .$item->mecanicos. '</td>
 
                       <td style="text-transform: uppercase;font-weight: 600; ">
                       <span style="color:' . ($item->tipo <= 0 ? '#ff2121 ' : '#fff ') . '">
@@ -106,6 +106,9 @@ foreach ($listar as $item) {
                       
                       <button type="submit" class="btn btn-warning editbtn" > <i class="fas fa-paint-brush"></i> </button>
                       &nbsp;
+                      <a href="movimentacao-delete.php?id=' . $item->id . '&caixa='.$item->caixa_id.'">
+                      <button type="button" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
+                      </a>
                       </td>
                       </tr>
 
@@ -150,7 +153,7 @@ foreach ($paginas as $key => $pagina) {
                         <div class="col-4">
 
                            <label>Buscar por Nome</label>
-                           <input type="text" class="form-control" name="buscar" value="<?= $buscar ?>">
+                           <input type="text" class="form-control" name="buscar" value="<?= $buscar ?>" disabled>
 
                         </div>
 
@@ -196,9 +199,9 @@ foreach ($paginas as $key => $pagina) {
 
                            <th style="text-align: center;"> STATUS </th>
                            <th style="text-align: center"> TIPO </th>
-                           <th style="text-align: left;width:280px"> DATA </th>
                            <th style="text-align: left;"> VEÍCULO / PLACA </th>
                            <th style="text-align: left;"> CATEGORIA </th>
+                           <th style="text-align: left;width:280px"> MECÂNICO </th>
                            <th style="text-align: left;width:180px"> DINHEIRO </th>
                            <th style="text-align: left;width:180px"> CRÉDITO </th>
                            <th style="text-align: left;width:180px"> DÉBITO </th>
@@ -480,7 +483,7 @@ foreach ($paginas as $key => $pagina) {
                   <div class="col-6">
                      
                         <label>Mecânicos</label>
-                        <select class="form-control select2bs4" style="width: 100%;" name="mecanicos_id" id="mecanicos_id">
+                        <select class="form-control " style="width: 100%;" name="mecanicos_id" id="mecanicos_id">
 
                           
                            <?php
@@ -501,7 +504,7 @@ foreach ($paginas as $key => $pagina) {
                            <label>Categorias</label>
                            <select class="form-control" style="width: 100%;" name="catdespesas_id" id="catdespesas_id" required>
 
-                              <option value=""> Selecione uma categoria </option>
+                      
                               <?php
 
                               foreach ($categorias as $item) {

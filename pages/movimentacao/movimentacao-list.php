@@ -23,9 +23,9 @@ $filtroStatus = filter_input(INPUT_GET, 'filtroStatus', FILTER_SANITIZE_STRING);
 $filtroStatus = in_array($filtroStatus,['0','1']) ? $filtroStatus : '';
 
 $condicoes = [
-    strlen($buscar) ? 'm.tipo LIKE "%'.str_replace(' ','%',$buscar).'%" or
-                       m.status LIKE "%'.str_replace(' ','%',$buscar).'%" or 
-                       f.nome LIKE "%'.str_replace(' ','%',$buscar).'%" or 
+    strlen($buscar) ? 'm.veiculo LIKE "%'.str_replace(' ','%',$buscar).'%" or
+                       m.placa LIKE "%'.str_replace(' ','%',$buscar).'%" or 
+                       mc.nome LIKE "%'.str_replace(' ','%',$buscar).'%" or 
                        c.nome LIKE "%'.str_replace(' ','%',$buscar).'%"' : null,
                        strlen($filtroStatus) ? 'm.status = "'.$filtroStatus.'"' : null
 ];
