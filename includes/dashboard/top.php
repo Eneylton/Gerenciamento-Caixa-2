@@ -28,7 +28,6 @@ $usuario = $usuariologado ?
         </li>
 
 
-
         <li class="<?php
 
                     switch ($acesso) {
@@ -49,6 +48,49 @@ $usuario = $usuariologado ?
 
                     ?>" style="display: none;">
           <a href="pages/caixa/caixa-list.php" class="nav-link">Abertura de Caixa</a>
+        </li>
+
+        <li class="<?php
+
+                    switch ($acesso) {
+                      case '2':
+                        echo "nav-item d-none d-sm-inline-block";
+                        break;
+                      case '3':
+                        echo "";
+                        break;
+                      case '4':
+                        echo "";
+                        break;
+
+                      default:
+                        echo "nav-item d-none d-sm-inline-block";
+                        break;
+                    }
+
+                    ?>" style="display: none;">
+          <a href="pages/extra/extra-list.php" class="nav-link">Cadastro serviços</a>
+        </li>
+        <li class="<?php
+
+                    switch ($acesso) {
+                      case '2':
+                        echo "nav-item d-none d-sm-inline-block";
+                        break;
+                      case '3':
+                        echo "";
+                        break;
+                      case '4':
+                        echo "";
+                        break;
+
+                      default:
+                        echo "nav-item d-none d-sm-inline-block";
+                        break;
+                    }
+
+                    ?>" style="display: none;">
+          <a href="pages/servicos/servicos-list.php" class="nav-link">Servicos extras </a>
         </li>
 
 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15-Nov-2021 às 23:42
--- Versão do servidor: 10.4.17-MariaDB
--- versão do PHP: 7.4.14
+-- Tempo de geração: 19-Nov-2021 às 21:24
+-- Versão do servidor: 10.4.18-MariaDB
+-- versão do PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -80,7 +80,6 @@ CREATE TABLE `cargos` (
 
 INSERT INTO `cargos` (`id`, `descricao`) VALUES
 (1, 'Asssistente de Logística'),
-(2, NULL),
 (3, NULL),
 (4, 'Supervisor de Operações Logísticas Interior'),
 (5, 'Encarregada de Expedição'),
@@ -136,6 +135,27 @@ INSERT INTO `catdespesas` (`id`, `nome`) VALUES
 (38, 'PAGAMENTO JEFSON'),
 (39, 'EXAMES ADM'),
 (40, 'TROCA DE ÓLEO');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `extra`
+--
+
+CREATE TABLE `extra` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `extra`
+--
+
+INSERT INTO `extra` (`id`, `nome`) VALUES
+(2, 'LIMPEZA DO MOTOR'),
+(3, 'GORJETAS'),
+(4, 'LIMPEZA DE BICO'),
+(5, 'ENCALHAMENTO');
 
 -- --------------------------------------------------------
 
@@ -250,6 +270,32 @@ INSERT INTO `movimentacoes` (`id`, `data`, `cartao`, `dinheiro`, `debito`, `pix`
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `servicos`
+--
+
+CREATE TABLE `servicos` (
+  `id` int(11) NOT NULL,
+  `data` date DEFAULT current_timestamp(),
+  `data1` timestamp NULL DEFAULT current_timestamp(),
+  `extra_id` int(11) NOT NULL,
+  `mecanicos_id` int(11) NOT NULL,
+  `valor` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `servicos`
+--
+
+INSERT INTO `servicos` (`id`, `data`, `data1`, `extra_id`, `mecanicos_id`, `valor`) VALUES
+(7, '2021-11-19', '2021-11-19 19:24:04', 2, 1, '20.00'),
+(8, '2021-11-19', '2021-11-19 19:24:23', 4, 1, '20.00'),
+(9, '2021-11-19', '2021-11-19 19:24:48', 3, 1, '15.00'),
+(10, '2021-11-19', '2021-11-19 19:25:27', 5, 3, '20.00'),
+(11, '2021-11-19', '2021-11-19 19:25:41', 3, 3, '30.00');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `usuarios`
 --
 
@@ -302,6 +348,12 @@ ALTER TABLE `catdespesas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `extra`
+--
+ALTER TABLE `extra`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `forma_pagamento`
 --
 ALTER TABLE `forma_pagamento`
@@ -329,6 +381,14 @@ ALTER TABLE `movimentacoes`
   ADD KEY `fk_movimentacoes_catdespesas1_idx` (`catdespesas_id`),
   ADD KEY `fk_movimentacoes_caixa1_idx` (`caixa_id`),
   ADD KEY `fk_movimentacoes_mecanicos1_idx` (`mecanicos_id`);
+
+--
+-- Índices para tabela `servicos`
+--
+ALTER TABLE `servicos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_servicos_extra1_idx` (`extra_id`),
+  ADD KEY `fk_servicos_mecanicos1_idx` (`mecanicos_id`);
 
 --
 -- Índices para tabela `usuarios`
@@ -368,6 +428,12 @@ ALTER TABLE `catdespesas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
+-- AUTO_INCREMENT de tabela `extra`
+--
+ALTER TABLE `extra`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de tabela `forma_pagamento`
 --
 ALTER TABLE `forma_pagamento`
@@ -392,6 +458,12 @@ ALTER TABLE `movimentacoes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
+-- AUTO_INCREMENT de tabela `servicos`
+--
+ALTER TABLE `servicos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -406,6 +478,13 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `maobra`
   ADD CONSTRAINT `fk_maobra_caixa` FOREIGN KEY (`caixa_id`) REFERENCES `caixa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `servicos`
+--
+ALTER TABLE `servicos`
+  ADD CONSTRAINT `fk_servicos_extra1` FOREIGN KEY (`extra_id`) REFERENCES `extra` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_servicos_mecanicos1` FOREIGN KEY (`mecanicos_id`) REFERENCES `mecanicos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
