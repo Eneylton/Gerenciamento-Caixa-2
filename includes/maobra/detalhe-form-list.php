@@ -149,9 +149,11 @@ foreach ($detalhes as $item) {
                <div class="card-header border-0">
                   <div class="d-flex justify-content-between">
                      <h3 class="card-title">
-                        <P>PRODUÇÃO DIÁRIA</P>
+                        <P>PRODUÇÃO DIÁRIA EM DINHEIRO</P>
                      </h3>
-                     <a href="#" >R$ <?= number_format($total_producao,"2",",",".") ?> </a>
+                     <div class="card-tools">
+                  <h2 style="color:#06be30">R$ <?= number_format($total_producao,"2",",",".") ?></h2>
+                </div>
                   </div>
                </div>
                <div class="card-body">

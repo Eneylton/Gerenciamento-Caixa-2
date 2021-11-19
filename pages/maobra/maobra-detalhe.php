@@ -182,7 +182,7 @@ var myChart = new Chart(ctx, {
         ]
         ,
         datasets: [{
-            label: '• PRODUÇÃO DIÁRIA •',
+            label: '• PRODUÇÃO DIÁRIA EM DINHEIRO•',
             data: [
                 <?php
             foreach ($producao as $item) {

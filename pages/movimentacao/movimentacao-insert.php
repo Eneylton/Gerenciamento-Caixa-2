@@ -236,7 +236,7 @@ if(isset($_POST['idcaixa'])){
 
         $obra = new Maobra;
 
-        $obra->credito = $valor;
+        $obra->cartao = $valor;
         $obra->caixa_id = $_POST['idcaixa'];
         $obra->veiculo = $_POST['veiculo'];
         $obra->placa = $_POST['placa'];

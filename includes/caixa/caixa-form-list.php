@@ -7,7 +7,11 @@ $resultados = '';
 foreach ($listar as $item) {
 
    $resultados .= '<tr>
-                      <td>' . $item->id . '</td>
+                      <td style="display:none">' . $item->id . '</td>
+                      <td style="display:none">' . $item->data . '</td>
+                      <td style="display:none">' . $item->valor . '</td>
+                      <td style="display:none">' . $item->forma_pagamento_id . '</td>
+                      <td >' . $item->id . '</td>
                       <td style="text-transform:uppercase; width:300px"> <h3><span class="badge badge-pill badge-warning">
                       <i class="fa fa-clock" aria-hidden="true"></i> &nbsp; &nbsp;' .date('d/m/Y à\s H:i:s ', strtotime($item->data)). '</span></h3> </td>
                      
@@ -209,11 +213,10 @@ foreach ($paginas as $key => $pagina) {
                   <input type="text" class="form-control" name="valor" id="valor" required >
                </div>
        
-            </div>
+           
             <div class="form-group">
                         <label>Forma de pagamento</label>
                         <select class="form-control select" style="width: 100%;" name="forma_pagamento_id" id="forma_pagamento_id">
-                           <option value=""> Selecione um tipo de pagamento </option>
                            <?php
 
                            foreach ($pagamentos as $item) {
