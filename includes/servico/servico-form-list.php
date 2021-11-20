@@ -150,6 +150,7 @@ foreach ($paginas as $key => $pagina) {
                         <tr>
                            <td colspan="5">
                               <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#modal-default"> <i class="fas fa-plus"></i> &nbsp; Nova</button>
+                              <button type="submit" class="btn btn-default float-right" data-toggle="modal" data-target="#modal-data"> <i class="fas fa-print"></i> &nbsp; IMPRIMIR RELATÓRIOS</button>
                            </td>
                         </tr>
                         <tr>
@@ -309,3 +310,65 @@ foreach ($paginas as $key => $pagina) {
    </div>
    <!-- /.modal-dialog -->
 </div>
+
+<div class="modal fade" id="modal-data">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content ">
+            <form action="./servicos-gerar.php" method="GET" enctype="multipart/form-data">
+
+               <div class="modal-header">
+                  <h4 class="modal-title">Relatórios
+                  </h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="card-body">
+
+                  <div class="form-group">
+
+                     <div class="row">
+
+                        <div class="col-lg-4 col-4">
+                           <input class="form-control" type="date" value="<?php echo date('Y-m-d') ?>" name="dataInicio">
+                        </div>
+
+
+                        <div class="col-lg-4 col-4">
+                           <input class="form-control" type="date" value="<?php echo date('Y-m-d') ?>" name="dataFim">
+                        </div>
+
+
+                        <div class="col-lg-4 col-4">
+
+                           <select class="form-control select" name="mecanicos_id">
+                              <option value="">Mecânico </option>
+                              <?php
+
+                              foreach ($mecanicos as $item) {
+                                 echo '<option value="' . $item->id . '">' . $item->nome . '</option>';
+                              }
+                              ?>
+
+                           </select>
+
+                        </div>
+
+                     </div>
+                  </div>
+
+               </div>
+               <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                  <button type="submit" class="btn btn-primary">Gerar relatório</button>
+               </div>
+
+            </form>
+
+         </div>
+         <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+   </div>
+
+ 

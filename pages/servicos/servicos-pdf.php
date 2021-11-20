@@ -2,30 +2,74 @@
 
 require __DIR__ . '../../../vendor/autoload.php';
 
-use \App\Entidy\Usuario;
-use   \App\Session\Login;
+use App\Entidy\Receber;
+use App\Entidy\Servico;
+use \App\Session\Login;
 
+$usuariologado = Login::getUsuarioLogado();
+
+$usuarios_nome = $usuariologado['nome'];
+$usuarios_email = $usuariologado['email'];
+
+$total = 0;
+$total_sub = 0;
+$total_qtd = 0;
+$total_disp = 0;
 
 Login::requireLogin();
 
+$dataInicio;
+$dataFim;
 
-$usuarios = Usuario::getUsuarioPdf();
+
+if ($mecanicos_id == "") {
+
+    $var1 = "";
+} else {
+
+    $var1 =  "AND s.mecanicos_id =" . $mecanicos_id . "";
+}
+
+
+$consulta = "s.data1 between ' " . $dataInicio . " ' AND ' " . $dataFim . " ' " . $var1 . "";
+
+$subtotal = 0;
 
 $res = "";
 
-foreach ($usuarios as $item) {
+$listar = Servico::getList(
+    's.id,
+s.data1,
+s.mecanicos_id,
+s.extra_id,
+s.valor,
+m.nome as mecanicos,
+e.nome as extra',
+    'servicos AS s
+                    INNER JOIN
+                    mecanicos AS m ON (s.mecanicos_id = m.id)
+                    INNER JOIN
+                    extra AS e ON (s.extra_id = e.id)',
+    $consulta,
+    's.data ASC',
+    null
+);
 
-    $res .= '
-<tr>
-<td>' . $item->id . '</td>
-<td>' . $item->nome . '</td>
-<td>' . $item->email . '</td>
-</tr>
-';
+foreach ($listar as $item) {
+
+$subtotal += $item->valor;
+
+    $res .= '   <tr>
+                        <td style="text-align:left;width:150px">' . date('d/m/Y  Á\S  H:i:s', strtotime($item->data1)) . '</td>
+                        <td style="text-align:left">' . $item->mecanicos . '</td>
+                        <td style="text-align:left">' . $item->extra . '</td>
+                        <td>R$ ' . number_format($item->valor, "2", ",", ".") . '</td>
+                        
+                </tr>
+                ';
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,21 +77,21 @@ foreach ($usuarios as $item) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <style>
-        @page{
+        @page {
             margin: 70px 0;
         }
 
-        body{
-            margin:0;
+        body {
+            margin: 0;
             padding: 0;
-            font-family:"Open Sans", sans-serif;
+            font-family: "Open Sans", sans-serif;
         }
-        
-        .header{
+
+        .header {
             position: fixed;
-            top:-70px;
+            top: -70px;
             left: 0;
             right: 0;
             width: 100%;
@@ -60,7 +104,7 @@ foreach ($usuarios as $item) {
             width: 160px;
         }
 
-        .footer{
+        .footer {
             bottom: -27px;
             left: 0;
             width: 100%;
@@ -68,98 +112,109 @@ foreach ($usuarios as $item) {
             text-align: center;
             background: #555555;
             color: #fff;
-            }     
-            
-            .footer .page:after{
-                content: counter(page);
-            }
+        }
 
-            table{
-                width: 100%;
-                border: 1px solid #555555;
-                margin: 0;
-                padding: 0;
-            }
+        .footer .page:after {
+            content: counter(page);
 
-            .table2{
+        }
 
-                width: 100%;
-                margin: 0;
-                padding: 0;
-                background: #fff;
+        table {
+            width: 100%;
+            border: 1px solid #555555;
+            margin: 0;
+            padding: 0;
+        }
 
-            }
+        th {
+            text-transform: uppercase;
+        }
 
-            th{
-                text-transform: uppercase;
-            }
+        table,
+        th,
+        td {
+            font-size: xx-small;
+            border: 1px solid #555555;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 5px;
 
-            .td2{
+        }
 
-                border: 1px solid #ffffff;
-                border-collapse:collapse;
-                text-align: left;
-                padding: 5px;
+        tr:nth-child(2n+0) {
+            background: #eeeeee;
+        }
 
-            }
+        p {
+            color: #888888;
+            margin: 0;
+            text-align: center;
+        }
 
-            table, th, td {
-                border: 1px solid #d1d1d1;
-                border-collapse:collapse;
-                text-align: left;
-                padding: 5px;
+        h2 {
+            text-align: center;
 
-            }
-
-            tr:nth-child(2n+0){
-                background: #eeeeee;
-            }
-
-            p{
-                color:#888888;
-                margin: 0;
-                text-align: center;
-            }
-
-            h2{
-                text-align: center;
-            }
-
+        }
     </style>
 
-    <title>Lista de Usuários</title>
-
-
+    <title>Receber itens</title>
 </head>
 
 <body>
 
-    
-<table class="table2">
+    <table style="margin-top: -40px;">
         <tbody>
-            <tr >
-                <td class="td2">
-    
-                <img src="assets/01.png"  style="width: 60px; height:60px; margin-top:-30px;">
-    
+            <tr style="background-color: #fff; color:#000">
+
+                <td style="text-align: left; width:260px; border:1px solid #fff; ">
+                    <span style="margin-left:110px; margin-top: -50px; font-size:small">Lojao do carro</span><br>
+                    <span style="margin-left:110px; margin-top: -30px; font-size:xx-small ">Email:&nbsp; <?= $usuarios_email  ?> </span><br>
+                    <span style="margin-left:110px; margin-top: -30px; font-size:xx-small">Atendente:&nbsp; <?= $usuarios_nome  ?> </span><br>
+                    <img style="width:108px; height:40px; float:left;margin-top:-50px; padding:10px; margin-left:-12px;" src="../../01.png">
+                    <br />
+                    <br />
+
                 </td>
-                <td class="td2"><span>LOJÃO DO CARRO -</span> <br /> <span style="color: #555555;">lojao do carro@gmail.com - (98) 88990-0909</span></td>
-                <td class="td2">Data: São luís 23/03/2021</td>
+                <td style="text-align:center; font-weight:600; font-size:16px; border:1px solid #fff;">• LISTA DE SERVIÇOS EXTRAS •</td>
+                <td style="text-align:right; border:1px solid #fff;margin-left:-10">
+                    <?php echo "Data: " . date('d/m/Y', strtotime($dataInicio));
+                    echo " á " . date('d/m/Y', strtotime($dataFim))  ?><br></td>
+
             </tr>
         </tbody>
     </table>
 
 
-
     <table>
         <tbody>
+            <tr style="background-color:#117a1e; color:#fff">
+                <td style="text-align: center; text-transform:uppercase" colspan="5">LISTA DE SERVIÇOS</td>
+            </tr>
+
             <tr style="background-color: #000; color:#fff">
-                <td>ID</td>
-                <td>NOME</td>
-                <td>EMAIL</td>
+
+                <td style="text-align:left"> DATA DO RECEBIMENTO </td>
+                <td style="text-align:left;width:100px"> MECÂNICO </td>
+                <td style="text-align:left; width:400px"> SERVIÇOS </td>
+                <td style="text-align:center; width:100px"> VALOR </td>
+
+
             </tr>
 
             <?= $res ?>
+
+
+            <tr>
+                <td colspan="3" style="text-align: right;">
+                 <span>TOTAL</span>
+                </td>
+                <td style="font-size:18px">
+
+                <span>R$ <?= number_format($subtotal,"2",",",".") ?> </span>
+
+                </td>
+            </tr>
+
 
         </tbody>
     </table>

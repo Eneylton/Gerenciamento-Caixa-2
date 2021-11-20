@@ -6,11 +6,11 @@ $alertaCadastro  = strlen($alertaCadastro) ? '<div class="alert alert-danger">'.
 ?>
 <div class="card card-outline card-primary">
       <div class="card-header text-center">
-<<<<<<< HEAD
+
         <img src="assets/01.png" >
-=======
+
         <img src="./assets/01.png" >
->>>>>>> 795b508f59e825d6df6d8b95146437e79863f4ed
+
       </div>
       <div class="card-body">
         <p class="login-box-msg">Faça login para iniciar sua sessão</p>
