@@ -19,6 +19,14 @@ if (isset($_GET['dataInicio'])) {
         $id_caixa = $_GET['id_caixa'];
     }
 
+    if ($_GET['catdespesas_id'] == "") {
+
+        $catdespesas_id = "";
+    } else {
+
+        $catdespesas_id = $_GET['catdespesas_id'];
+    }
+
 }
 
 

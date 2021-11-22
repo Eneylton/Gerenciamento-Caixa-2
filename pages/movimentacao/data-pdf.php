@@ -16,7 +16,27 @@ $dataInicio;
 $dataFim;
 $id_caixa;
 
-$consulta = "m.data between '".$dataInicio."' AND '".$dataFim."' AND caixa_id = '".$id_caixa."'";
+$dinheiro = 0;
+$cartao = 0;
+$debito = 0;
+$pix = 0;
+$transferencia = 0;
+$geral = 0;
+$total_dinheiro = 0;
+$saida = 0;
+$saldo = 0;
+
+if($catdespesas_id == ""){
+
+    $var4 = "";
+
+}else{
+
+    $var4 = " AND m.catdespesas_id=".$catdespesas_id."";
+}
+
+
+$consulta = "m.data between '".$dataInicio."' AND '".$dataFim."' AND caixa_id = '".$id_caixa."'".$var4;
 
 $result = "";
 
@@ -46,6 +66,21 @@ mecanicos AS mc ON (m.mecanicos_id = mc.id)',$consulta,null,null);
 
 foreach ($listar as $item) {
  
+    $dinheiro += $item->dinheiro;
+    $cartao += $item->cartao;
+    $debito += $item->debito;
+    $pix += $item->pix;
+    $transferencia += $item->transferencia;
+
+    switch ($item->tipo) {
+        case '1':
+           $total_dinheiro += $item->dinheiro;
+           break;
+  
+        default:
+           $saida += $item->dinheiro;
+           break;
+     }
   
      if (empty($item->veiculo)) {
   
@@ -76,6 +111,9 @@ foreach ($listar as $item) {
                    </tr>
                 ';
 }
+
+$geral = ($cartao + $debito + $pix + $transferencia);
+$saldo = ($saida - $total_dinheiro);
 
 ?>
 
@@ -216,12 +254,17 @@ foreach ($listar as $item) {
             <?= $result ?>
 
             <tr style="background-color:#036a3a; color:#fff">
-                <td style="text-align: right; text-transform:uppercas" colspan="3">TOTAL</td>
-                <td style="text-align: left; text-transform:uppercas" colspan="1">TOTAL</td>
-                <td style="text-align: left; text-transform:uppercas" colspan="1">TOTAL</td>
-                <td style="text-align: left; text-transform:uppercas" colspan="1">TOTAL</td>
-                <td style="text-align: left; text-transform:uppercas" colspan="1">TOTAL</td>
-                <td style="text-align: left; text-transform:uppercas" colspan="1">TOTAL</td>
+                <td style="text-align: right; text-transform:uppercas" colspan="3">RECEBER</td>
+                <td style="text-align: left;font-size:12px" colspan="1">R$ <?= number_format($saldo,"2",",",".") ?></td>
+                <td style="text-align: left; " colspan="1">R$ <?= number_format($cartao,"2",",",".") ?></td>
+                <td style="text-align: left; " colspan="1">R$ <?= number_format($debito,"2",",",".") ?></td>
+                <td style="text-align: left; " colspan="1">R$ <?= number_format($pix,"2",",",".") ?></td>
+                <td style="text-align: left; " colspan="1">R$ <?= number_format($transferencia,"2",",",".") ?></td>
+            </tr>
+            <tr style="background-color:#0d3228; color:#fff">
+                <td style="text-align: right;" colspan="4">A RECEBER</td>
+                <td style="text-align:center;font-size:15px" colspan="4">R$ <?= number_format($geral,"2",",",".") ?></td>
+               
             </tr>
             
 

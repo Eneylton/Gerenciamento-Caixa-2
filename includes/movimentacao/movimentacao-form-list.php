@@ -629,17 +629,33 @@ foreach ($paginas as $key => $pagina) {
 
                      <div class="row">
                     
-                        <div class="col-lg-6 col-6">
+                        <div class="col-lg-4 col-4">
                         <label>Selecione o periodo</label>
                            <input class="form-control" type="date" value="<?php echo date('Y-m-d') ?>" name="dataInicio">
                         </div>
 
 
-                        <div class="col-lg-6 col-6">
+                        <div class="col-lg-4 col-4">
                         <label>Fim</label>
                            <input class="form-control" type="date" value="<?php echo date('Y-m-d') ?>" name="dataFim">
                         </div>
+                        <div class="col-lg-4 col-4">
+                        
+                    
+                           <label>Categorias</label>
+                           <select class="form-control" style="width: 100%;" name="catdespesas_id" id="catdespesas_id">
+                           <option value=""> Selecione uma categoria </option>
+                      
+                              <?php
 
+                              foreach ($categorias as $item) {
+                                 echo '<option value="' . $item->id . '">' . $item->nome . '</option>';
+                              }
+                              ?>
+
+                           </select>
+                        </div>
+                  
                      </div>
                   </div>
 

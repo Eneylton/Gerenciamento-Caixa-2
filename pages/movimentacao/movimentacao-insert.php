@@ -5,6 +5,7 @@ require __DIR__.'../../../vendor/autoload.php';
 use App\Entidy\Maobra;
 use App\Session\Login;
 use App\Entidy\Movimentacao;
+use App\Entidy\Pagamento;
 
 $previous = "javascript:history.go(-1)";
 if (isset($_SERVER['HTTP_REFERER'])) {
@@ -14,6 +15,8 @@ if (isset($_SERVER['HTTP_REFERER'])) {
 $usuariologado = Login:: getUsuarioLogado();
 
 $usuarios_id = $usuariologado['id'];
+
+$saldo = 0;
 
 Login::requireLogin();
 
@@ -219,6 +222,8 @@ if(isset($_POST['idcaixa'])){
 
       }elseif ($_POST['dinheiro']) {
 
+        $agora = date('Y-m-d');
+
         $obra = new Maobra;
 
         $obra->dinheiro = $valor;
@@ -231,6 +236,14 @@ if(isset($_POST['idcaixa'])){
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
+
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->atualizar();
 
       }elseif ($_POST['credito']) {
 
