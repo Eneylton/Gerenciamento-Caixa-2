@@ -2,10 +2,8 @@
 
 require __DIR__ . '../../../vendor/autoload.php';
 
-use App\Entidy\Catdespesa;
-use App\Entidy\FormaPagamento;
 use App\Entidy\Movimentacao;
-use \App\Session\Login;
+use App\Session\Login;
 
 Login::requireLogin();
 
@@ -14,127 +12,67 @@ $usuariologado = Login::getUsuarioLogado();
 $usuarios_nome = $usuariologado['nome'];
 $usuarios_email = $usuariologado['email'];
 
-$categorias = Catdespesa :: getList('*','catdespesas');
-$pagamentos = FormaPagamento :: getList('*','forma_pagamento');
-
 $dataInicio;
 $dataFim;
-$status;
-$tipo;
+$id_caixa;
 
-
-
-if (isset($status)) {
-
-    $var1 = " AND m.status=".$status."";
-
-}else{
-
-    $var1 = "";
-}
-
-if (isset($tipo)) {
-
-    $var2 = " AND m.tipo=".$tipo."";
-
-}else{
-    
-$var2 = "";
-
-}
-
-if($form_pagamento == ""){
-
-    $var3 = "";
-
-}else{
-
-    $var3 =  " AND m.forma_pagamento_id=".$form_pagamento."";
-}
-
-if($catdespesas_id == ""){
-
-    $var4 = "";
-
-}else{
-
-    $var4 = " AND m.catdespesas_id=".$catdespesas_id."";
-}
-
-
-
-$consulta = "m.data between '".$dataInicio."' AND '".$dataFim."' ".$var1." " .$var2. " " .$var3. " " .$var4. "";
-
-
+$consulta = "m.data between '".$dataInicio."' AND '".$dataFim."' AND caixa_id = '".$id_caixa."'";
 
 $result = "";
 
-$listar = Movimentacao ::getList(' m.id AS id,m.usuarios_id AS usuarios_id,m.catdespesas_id AS catdespesas_id,
-m.forma_pagamento_id AS forma_pagamento_id,m.data AS data,m.valor AS valor,
-m.descricao AS descricao,m.tipo AS tipo,m.status AS status,
-u.nome AS usuario,c.nome AS categoria,f.nome AS pagamento','movimentacoes AS m INNER JOIN usuarios AS u ON (m.usuarios_id = u.id) INNER JOIN
-catdespesas AS c ON (m.catdespesas_id = c.id) INNER JOIN forma_pagamento AS f ON (m.forma_pagamento_id = f.id)',$consulta,null,null);
+$listar = Movimentacao ::getList(' m.id AS id,
+m.caixa_id AS caixa_id,
+m.maobra AS maobra,
+m.catdespesas_id AS catdespesas_id,
+m.mecanicos_id AS mecanicos_id,
+m.data AS data,
+m.descricao AS descricao,
+m.tipo AS tipo,
+m.status AS status,
+m.dinheiro AS dinheiro,
+m.cartao AS cartao,
+m.debito AS debito,
+m.pix AS pix,
+m.veiculo AS veiculo,
+m.placa AS placa,
+m.transferencia AS transferencia,
+mc.nome AS mecanicos,
+c.nome AS categoria','movimentacoes AS m
+INNER JOIN
+catdespesas AS c ON (m.catdespesas_id = c.id)
+INNER JOIN
+mecanicos AS mc ON (m.mecanicos_id = mc.id)',$consulta,null,null);
 
-$despesa  = 0;
-$receita  = 0;
-$valor1  = 0;
-$total = 0;
-$resultados = '';
-$list = '';
-$status1 = '';
-$total = 0;
-$total_dinheiro = 0;
 
 foreach ($listar as $item) {
-
-    $total = $item->valor;
-    $status1 = $item->status;
  
-    if ($item->status <= 0) {
-       $valor1 = 0;
-       if ($item->tipo == 0) {
- 
-          $despesa += $valor1;
-       } else {
- 
-          $receita += $valor1;
-       }
-    } else {
-       if ($item->tipo == 0) {
- 
-          $despesa += $item->valor;
-       } else {
- 
-          $receita += $item->valor;
-       }
-    }
- 
-    $total = ($receita - $despesa);
+  
+     if (empty($item->veiculo)) {
+  
+        $veiculo = '<span style="color:#5f6368"> Nenhum !!!! </span>';
+     } else {
+        $veiculo = $item->veiculo;
+     }
  
 
     $result .= '   <tr>
-                        <td>
-                         
-                        <img src="../../imgs/'.($item->tipo <= 0 ? 'seta1.png' : 'seta2.png').'" style="width:20px; 10px">
+                        
+                        <td style="text-transform: uppercase; text-align:left">' . $veiculo . ' / <span style="color:#ff0000"> ' . $item->placa . ' </span></td>
+                        <td style="text-transform: uppercase;text-align:left">' . $item->categoria . '</td>
+                        <td style="text-transform: uppercase;text-align:left">' .$item->mecanicos. '</td>
 
-                        </td>
-                   
-                        <td>
-                                    
-                        <span style="color:' . ($item->status <= 0 ? '#ff2121' : '#0e8219') . '">
-                        ' . ($item->status <= 0 ? 'EM ABERTO' : 'PAGO') . '
+                        <td style="text-transform: uppercase;text-align:left">
+                        <span style="color:' . ($item->tipo <= 0 ? '#ff0000 ' : '#000 ') . '">
+                        R$ ' . number_format($item->dinheiro, "2", ",", ".") . '
                         </span>
 
                         </td>
 
-                        <td>' . date('d/m/Y à\s H:i:s ', strtotime($item->data)) . '</td>
+                        <td style="text-align:left"> R$ ' . number_format($item->cartao, "2", ",", ".") . '</td>
+                        <td style="text-align:left"> R$ ' . number_format($item->debito, "2", ",", ".") . '</td>
+                        <td style="text-align:left"> R$ ' . number_format($item->pix, "2", ",", ".") . '</td>
+                        <td style="text-align:left"> R$ ' . number_format($item->transferencia, "2", ",", ".") . '</td>
 
-                        <td style="text-transform: uppercase; font-weight:100; text-align:left">' . $item->categoria . '</td>
-                        <td style="text-transform: uppercase; text-align:left ">' . $item->pagamento . '</td>
-                        <td style="text-transform: uppercase; text-align:left ">' . $item->usuario . '</td>
-                        <td style="text-transform: uppercase; text-align:left ">' . $item->descricao . '</td>
-                        <td style="text-transform: uppercase; font-weight:200; text-align:left;font-size:12px"> R$ ' . number_format($item->valor, "2", ",", ".") . '</td>
-                    
                    </tr>
                 ';
 }
@@ -263,30 +201,28 @@ foreach ($listar as $item) {
 
             <tr style="background-color: #000; color:#fff">
 
-                <td style="text-align:center; font-size:x-small; width:20px"> #</td>
-                <td style="text-align:center;  width:80px"> STATUS </td>
-                <td style="text-align:center;  width:120px"> DATA </td>
-                <td style="text-align:left;  width:130px"> CATEGORIA </td>
-                <td style="text-align:left;  width:100px"> F. DE PAGAMENTO </td>
-                <td style="text-align:left;  width:100px"> USUÁRIO</td>
-                <td style="text-align:left;  width:321px"> DESCRIÇÃO</td>
-                <td style="text-align:left;  width:155px"> VALOR</td>
-                
-
-                
+                <td style="text-align:left; width:205px"> VEÍCULO / PLACA</td>                
+                <td style="text-align:left;width:205px"> CATEGORIA</td>                
+                <td style="text-align:left;width:120px"> MECÂNICO</td>                
+                <td style="text-align:left;width:100px"> DINHEIRO</td>                
+                <td style="text-align:left;width:100px"> CRÉDITO</td>                
+                <td style="text-align:left;width:100px"> DÉBITO</td>                
+                <td style="text-align:left;width:100px"> PIX</td>                
+                <td style="text-align:left;width:100px"> TRANSFERÊNCIA</td>                
+                       
 
             </tr>
 
             <?= $result ?>
 
-                <tr style="background-color: #0e8219; color:#fff">
-                <td colspan="7" style="text-align: right;">
-                <span style="font-size: 16px; font-weight:600"> TOTAL &nbsp; &nbsp;</span>
-                </td>
-                <td style="text-align: left;">
-                <span style="font-size: 16px; font-weight:600;text-align:left;">R$ <?= number_format($total, "2", ",", "."); ?></span>
-                </td>
-                </tr>
+            <tr style="background-color:#036a3a; color:#fff">
+                <td style="text-align: right; text-transform:uppercas" colspan="3">TOTAL</td>
+                <td style="text-align: left; text-transform:uppercas" colspan="1">TOTAL</td>
+                <td style="text-align: left; text-transform:uppercas" colspan="1">TOTAL</td>
+                <td style="text-align: left; text-transform:uppercas" colspan="1">TOTAL</td>
+                <td style="text-align: left; text-transform:uppercas" colspan="1">TOTAL</td>
+                <td style="text-align: left; text-transform:uppercas" colspan="1">TOTAL</td>
+            </tr>
             
 
         </tbody>

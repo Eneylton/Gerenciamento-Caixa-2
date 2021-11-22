@@ -48,9 +48,30 @@ $usuario = $usuariologado ?
                     }
 
                     ?>" style="display: none;">
-          <a href="../../pages/caixa/caixa-list.php" class="nav-link">Abertura de Caixa</a>
+          <a href="../../pages/caixa/caixa-list.php" class="nav-link">Abertura de caixa</a>
         </li>
 
+        <li class="<?php
+
+                    switch ($acesso) {
+                      case '2':
+                        echo "nav-item d-none d-sm-inline-block";
+                        break;
+                      case '3':
+                        echo "";
+                        break;
+                      case '4':
+                        echo "";
+                        break;
+
+                      default:
+                        echo "nav-item d-none d-sm-inline-block";
+                        break;
+                    }
+
+                    ?>" style="display: none;">
+          <a href="../../pages/servicos/servicos-list.php" class="nav-link">Serviços extras</a>
+        </li>
 
         <li class="<?php
 
@@ -72,49 +93,6 @@ $usuario = $usuariologado ?
 
                     ?>" style="display: none;">
           <a href="../../pages/mecanicos/mecanico-list.php" class="nav-link">Mecânicos</a>
-        </li>
-
-        <li class="<?php
-
-                    switch ($acesso) {
-                      case '2':
-                        echo "nav-item d-none d-sm-inline-block";
-                        break;
-                      case '3':
-                        echo "";
-                        break;
-                      case '4':
-                        echo "";
-                        break;
-
-                      default:
-                        echo "nav-item d-none d-sm-inline-block";
-                        break;
-                    }
-
-                    ?>" style="display: none;">
-          <a href="../../pages/extra/extra-list.php" class="nav-link">Cadastro serviços</a>
-        </li>
-        <li class="<?php
-
-                    switch ($acesso) {
-                      case '2':
-                        echo "nav-item d-none d-sm-inline-block";
-                        break;
-                      case '3':
-                        echo "";
-                        break;
-                      case '4':
-                        echo "";
-                        break;
-
-                      default:
-                        echo "nav-item d-none d-sm-inline-block";
-                        break;
-                    }
-
-                    ?>" style="display: none;">
-          <a href="../../pages/servicos/servicos-list.php" class="nav-link">Serviços extras</a>
         </li>
 
 

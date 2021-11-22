@@ -11,7 +11,7 @@ $acesso = $usuariologado['acessos_id'];
   <!-- Brand Logo -->
   <a href="index3.html" class="brand-link">
     <img src="../../assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">Lojo carro</span>
+    <span class="brand-text font-weight-light">Lojão carro</span>
   </a>
 
   <!-- Sidebar -->
@@ -76,30 +76,7 @@ $acesso = $usuariologado['acessos_id'];
                 <p>Relatórios</p>
               </a>
             </li>
-            <li class="nav-item" style="display:<?php
-
-                                                switch ($acesso) {
-                                                  case '2':
-                                                    echo "none";
-                                                    break;
-                                                  case '3':
-                                                    echo "none";
-                                                    break;
-                                                  case '4':
-                                                    echo "";
-                                                    break;
-
-                                                  default:
-                                                    echo "";
-                                                    break;
-                                                }
-
-                                                ?>">
-              <a href="../../pages/pdv/pdv.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Pdv</p>
-              </a>
-            </li>
+        
 
           </ul>
         </li>
@@ -185,34 +162,9 @@ $acesso = $usuariologado['acessos_id'];
                                                 }
 
                                                 ?>">
-              <a href="../../pages/categorias/categoria-list.php" class="nav-link">
+              <a href="../../pages/extra/extra-list.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Categorias</p>
-              </a>
-            </li>
-
-            <li class="nav-item" style="display:<?php
-
-                                                switch ($acesso) {
-                                                  case '2':
-                                                    echo "none";
-                                                    break;
-                                                  case '3':
-                                                    echo "none";
-                                                    break;
-                                                  case '4':
-                                                    echo "none";
-                                                    break;
-
-                                                  default:
-                                                    echo "";
-                                                    break;
-                                                }
-
-                                                ?>">
-              <a href="../../pages/clientes/clientes-list.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Clientes</p>
+                <p>Servicos</p>
               </a>
             </li>
 

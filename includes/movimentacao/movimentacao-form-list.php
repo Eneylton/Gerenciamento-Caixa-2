@@ -190,6 +190,7 @@ foreach ($paginas as $key => $pagina) {
                               <button style="margin-right:50px; font-weight:600; font-size:x-large" type="submit" class="<?= $saldo <= 0 ? 'btn btn-danger' : 'btn btn-success' ?> float-right btn-lg"><i class="fa fa-arrow-right" aria-hidden="true"></i>
                                  SALDO R$ &nbsp;<?= number_format($saldo, "2", ",", ".")  ?></button>
 
+                              <button style="margin-right:50px; font-weight:600; font-size:x-large" type="submit" class="btn btn-default float-right" data-toggle="modal" data-target="#modal-data"> <i class="fas fa-print"></i> &nbsp; IMPRIMIR RELATÓRIOS</button>
 
 
                            </td>
@@ -610,3 +611,50 @@ foreach ($paginas as $key => $pagina) {
    </div>
    <!-- /.modal-dialog -->
 </div>
+<div class="modal fade" id="modal-data">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content ">
+            <form action="./gerar-data-pdf.php" method="GET" enctype="multipart/form-data">
+               <input type="hidden" name="id_caixa" value="<?= $id_caixa ?>">
+               <div class="modal-header">
+                  <h4 class="modal-title">Relatórios
+                  </h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="card-body">
+
+                  <div class="form-group">
+
+                     <div class="row">
+                    
+                        <div class="col-lg-6 col-6">
+                        <label>Selecione o periodo</label>
+                           <input class="form-control" type="date" value="<?php echo date('Y-m-d') ?>" name="dataInicio">
+                        </div>
+
+
+                        <div class="col-lg-6 col-6">
+                        <label>Fim</label>
+                           <input class="form-control" type="date" value="<?php echo date('Y-m-d') ?>" name="dataFim">
+                        </div>
+
+                     </div>
+                  </div>
+
+               </div>
+               <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                  <button type="submit" class="btn btn-primary">Gerar relatório</button>
+               </div>
+
+            </form>
+
+         </div>
+         <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+   </div>
+
+ 

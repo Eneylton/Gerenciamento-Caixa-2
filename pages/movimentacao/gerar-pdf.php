@@ -22,6 +22,6 @@ $dompdf->setPaper("A4","landscape");
 
 $dompdf->render();
 
-$dompdf->stream("pedido.pdf", ["Attachment"=> false]);
+$dompdf->stream("movimentacao.pdf", ["Attachment"=> false]);
 
 

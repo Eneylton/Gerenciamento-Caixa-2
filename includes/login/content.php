@@ -9,8 +9,6 @@ $alertaCadastro  = strlen($alertaCadastro) ? '<div class="alert alert-danger">'.
 
         <img src="assets/01.png" >
 
-        <img src="./assets/01.png" >
-
       </div>
       <div class="card-body">
         <p class="login-box-msg">Faça login para iniciar sua sessão</p>

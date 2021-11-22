@@ -11,43 +11,15 @@ if (isset($_GET['dataInicio'])) {
     $dataFim = $_GET['dataFim'];
 
 
-    if ($_GET['form_pagamento'] == "") {
+    if ($_GET['id_caixa'] == "") {
 
-        $form_pagamento = "";
+        $id_caixa = "";
     } else {
 
-        $form_pagamento = $_GET['form_pagamento'];
+        $id_caixa = $_GET['id_caixa'];
     }
 
-    if ($_GET['catdespesas_id'] == "") {
-
-        $catdespesas_id = "";
-    } else {
-
-        $catdespesas_id = $_GET['catdespesas_id'];
-    }
-
-    if (isset($_GET['status'])) {
-        if ($_GET['status'] == "") {
-
-            $status = "";
-        } else {
-
-            $status = $_GET['status'];
-        }
-    }
-
-    if (isset($_GET['tipo'])) {
-        if ($_GET['tipo'] == "") {
-
-            $tipo = "";
-        } else {
-
-            $tipo = $_GET['tipo'];
-        }
-    }
 }
-
 
 
 $dompdf = new Dompdf();

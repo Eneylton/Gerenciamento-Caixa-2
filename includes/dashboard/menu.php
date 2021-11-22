@@ -78,30 +78,6 @@ $acesso = $usuariologado['acessos_id'];
               </a>
             </li>
 
-            <li class="nav-item" style="display:<?php
-
-                                                switch ($acesso) {
-                                                  case '2':
-                                                    echo "none";
-                                                    break;
-                                                  case '3':
-                                                    echo "none";
-                                                    break;
-                                                  case '4':
-                                                    echo "";
-                                                    break;
-
-                                                  default:
-                                                    echo "";
-                                                    break;
-                                                }
-
-                                                ?>">
-              <a href="pages/pdv/pdv.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Pdv</p>
-              </a>
-            </li>
 
           </ul>
         </li>
@@ -117,30 +93,6 @@ $acesso = $usuariologado['acessos_id'];
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item" style="display:<?php
-
-                                                switch ($acesso) {
-                                                  case '2':
-                                                    echo "none";
-                                                    break;
-                                                  case '3':
-                                                    echo "none";
-                                                    break;
-                                                  case '4':
-                                                    echo "none";
-                                                    break;
-
-                                                  default:
-                                                    echo "";
-                                                    break;
-                                                }
-
-                                                ?>">
-              <a href="pages/produtos/produto-list.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Produtos</p>
-              </a>
-            </li>
 
             <li class="nav-item" style="display:<?php
 
@@ -187,9 +139,9 @@ $acesso = $usuariologado['acessos_id'];
                                                 }
 
                                                 ?>">
-              <a href="pages/categorias/categoria-list.php" class="nav-link">
+              <a href="pages/extra/extra-list.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Categorias</p>
+                <p>Serviços</p>
               </a>
             </li>
 
