@@ -20,6 +20,7 @@ $saldo = 0;
 
 Login::requireLogin();
 
+
 if(isset($_POST['idcaixa'])){
 
     $din1               = $_POST['dinheiro'];
@@ -330,6 +331,34 @@ if(isset($_POST['idcaixa'])){
     $item->mecanicos_id = $mec;
     $item->maobra =  $maobra5;
     $item->cadastar();
+
+    if($_POST['catdespesas_id'] == 38){
+        
+      $agora = date('Y-m-d');
+
+      $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+      $valorPag = $pagamento->valor;
+      $saldo = ($valorPag - $preco1);
+
+      switch ($saldo) {
+        case '0':
+          $status = 1;
+          break;
+          
+          default:
+          $status = 0;
+          break;
+      }
+
+
+      $pagamento->data  =  $agora;
+      $pagamento->status  =  $status;
+      $pagamento->valor =  $saldo;
+      $pagamento->atualizar();
+
+
+
+}
 
     header('location: movimentacao-list.php?id='.$_POST['idcaixa']);
 

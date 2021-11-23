@@ -52,7 +52,7 @@ foreach ($detalhes as $item) {
          <div class="col-lg-6">
          <div class="card">
               <div class="card-header border-0">
-                <h3 class="card-title">VALOR A PAGAR</h3>
+                <a href="../../pages/pagamentos/pagamento-list.php"><h3 class="card-title">VALOR A PAGAR</h3></a>
                 <div class="card-tools">
                   <h2 style="color:#4f99e3">R$ <?= number_format($dinheiro,"2",",",".") ?></h2>
                 </div>

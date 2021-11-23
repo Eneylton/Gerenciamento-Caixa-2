@@ -411,9 +411,6 @@ foreach ($paginas as $key => $pagina) {
                                     <input type="radio" name="tipo" value="0"> Saida
                                  </label>
                               </div>
-
-
-
                            </div>
                         </div>
                      </div>
