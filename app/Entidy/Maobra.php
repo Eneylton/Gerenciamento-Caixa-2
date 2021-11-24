@@ -19,7 +19,7 @@ class Maobra
     public $placa;
     public $descricao;
     public $status;
-    public $servico;
+    public $catdespesas_id;
     public $tipo;
     public $mecanicos_id;
     public $caixa_id;
@@ -41,7 +41,7 @@ class Maobra
             'placa'                    => $this->placa,
             'descricao'                => $this->descricao,
             'status'                   => $this->status,
-            'servico'                  => $this->servico,
+            'catdespesas_id'                  => $this->catdespesas_id,
             'tipo'                     => $this->tipo,
             'mecanicos_id'             => $this->mecanicos_id,
             'caixa_id'                 => $this->caixa_id
@@ -66,7 +66,7 @@ class Maobra
             'placa'                    => $this->placa,
             'descricao'                => $this->descricao,
             'status'                   => $this->status,
-            'servico'                  => $this->servico,
+            'catdespesas_id'                  => $this->catdespesas_id,
             'tipo'                     => $this->tipo,
             'mecanicos_id'             => $this->mecanicos_id,
             'caixa_id'                 => $this->caixa_id

@@ -72,7 +72,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -90,7 +90,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -108,7 +108,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -126,7 +126,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -144,7 +144,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -162,7 +162,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -180,7 +180,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -198,7 +198,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -216,7 +216,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -233,7 +233,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -256,7 +256,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -271,7 +271,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -286,7 +286,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
@@ -301,7 +301,7 @@ if(isset($_POST['idcaixa'])){
         $obra->placa = $_POST['placa'];
         $obra->descricao = $_POST['descricao'];
         $obra->mecanicos_id = $mec;
-        $obra->servico = $_POST['catdespesas_id'];
+        $obra->catdespesas_id = $_POST['catdespesas_id'];
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
