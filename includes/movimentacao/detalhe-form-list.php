@@ -106,7 +106,15 @@ $saldo_total = ($saldo_dinheiro + $troco);
                   </p>
                   <p class="d-flex flex-column text-right">
                     <span class="font-weight-bold">
-                      <i class="ion ion-android-arrow-up text-success"></i> R$ <?= number_format($saldo_dinheiro ,"2",",",".")  ?>
+                       <?php
+                        if ($saldo_dinheiro <= 0) {
+                           echo '<span class="font-weight-bold" style="color:#ff0000">
+                           <i class="ion ion-android-arrow-down text-danger"></i> &nbsp;' . number_format($saldo_dinheiro, "2", ",", ".") . '</span> <span class="text-muted"></span>';
+                        } else {
+                           echo '<span class="font-weight-bold" style="color:#28a745" > 
+                           <i class="ion ion-android-arrow-up text-success" ></i> &nbsp;' . number_format($saldo_dinheiro, "2", ",", ".") . '</span> <span class="text-muted"></span>';
+                        }
+                        ?>
                     </span>
                     <span class="text-muted">SALDO EM DINHEIRO</span>
                   </p>
@@ -118,7 +126,15 @@ $saldo_total = ($saldo_dinheiro + $troco);
                   </p>
                   <p class="d-flex flex-column text-right">
                     <span class="font-weight-bold">
-                      <i class="ion ion-android-arrow-down text-danger"></i> R$ <?= number_format($total_dinheiro2,"2",",",".")  ?>
+                    <?php
+                        if ($total_dinheiro2 <= 0) {
+                           echo '<span class="font-weight-bold" style="color:#28a745">
+                           <i class="ion ion-android-arrow-up text-success"></i> &nbsp;' . number_format($total_dinheiro2, "2", ",", ".") . '</span> <span class="text-muted"></span>';
+                        } else {
+                           echo '<span class="font-weight-bold" style="color:#ff0000" > 
+                           <i class="ion ion-android-arrow-down text-danger" ></i> &nbsp;' . number_format($total_dinheiro2, "2", ",", ".") . '</span> <span class="text-muted"></span>';
+                        }
+                        ?>
                     </span>
                     <span class="text-muted">TOTAL DE DESPESAS</span>
                   </p>

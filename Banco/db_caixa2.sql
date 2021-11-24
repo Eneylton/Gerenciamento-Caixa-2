@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22-Nov-2021 às 21:01
--- Versão do servidor: 10.4.18-MariaDB
--- versão do PHP: 7.3.28
+-- Tempo de geração: 24-Nov-2021 às 21:10
+-- Versão do servidor: 10.4.17-MariaDB
+-- versão do PHP: 7.4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -61,7 +61,7 @@ CREATE TABLE `caixa` (
 --
 
 INSERT INTO `caixa` (`id`, `data`, `valor`, `forma_pagamento_id`, `usuarios_id`) VALUES
-(13, '2021-11-22 19:55:40', '120.00', 2, 0);
+(20, '2021-11-24 12:59:55', '340.80', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -134,7 +134,8 @@ INSERT INTO `catdespesas` (`id`, `nome`) VALUES
 (37, 'MERCEARIA'),
 (38, 'PAGAMENTO JEFSON'),
 (39, 'EXAMES ADM'),
-(40, 'TROCA DE ÓLEO');
+(40, 'TROCA DE ÓLEO'),
+(41, 'COMBUSTIVEL');
 
 -- --------------------------------------------------------
 
@@ -199,19 +200,18 @@ CREATE TABLE `maobra` (
   `veiculo` varchar(45) DEFAULT NULL,
   `placa` varchar(45) DEFAULT NULL,
   `descricao` varchar(335) DEFAULT NULL,
-  `servico` varchar(45) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `mecanicos_id` int(11) NOT NULL,
-  `caixa_id` int(11) NOT NULL
+  `caixa_id` int(11) NOT NULL,
+  `catdespesas_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `maobra`
 --
 
-INSERT INTO `maobra` (`id`, `data`, `cartao`, `dinheiro`, `debito`, `pix`, `transferencia`, `tipo`, `veiculo`, `placa`, `descricao`, `servico`, `status`, `mecanicos_id`, `caixa_id`) VALUES
-(104, '2021-11-22 19:56:10', NULL, '50.00', NULL, NULL, NULL, 0, 'vera cruz', 'hot-2020', '', 'SERVIÇOS MECÊNANICOS', 0, 1, 13),
-(105, '2021-11-22 19:58:27', NULL, '100.00', NULL, NULL, NULL, 0, 'vera cruz', 'hot-2020', '', 'SERVIÇOS MECÊNANICOS', 0, 2, 13);
+INSERT INTO `maobra` (`id`, `data`, `cartao`, `dinheiro`, `debito`, `pix`, `transferencia`, `tipo`, `veiculo`, `placa`, `descricao`, `status`, `mecanicos_id`, `caixa_id`, `catdespesas_id`) VALUES
+(113, '2021-11-24 14:13:59', NULL, '35.00', NULL, NULL, NULL, 0, 'kics', 'não informado', '', 0, 9, 20, 3);
 
 -- --------------------------------------------------------
 
@@ -272,8 +272,14 @@ CREATE TABLE `movimentacoes` (
 --
 
 INSERT INTO `movimentacoes` (`id`, `data`, `cartao`, `dinheiro`, `debito`, `pix`, `transferencia`, `tipo`, `veiculo`, `placa`, `descricao`, `status`, `catdespesas_id`, `caixa_id`, `mecanicos_id`, `maobra`) VALUES
-(122, '2021-11-22 19:56:10', '0.00', '500.00', '0.00', '0.00', '0.00', 1, 'vera cruz', 'hot-2020', '', 1, 1, 13, 1, '100.00'),
-(123, '2021-11-22 19:58:27', '0.00', '600.00', '0.00', '0.00', '0.00', 1, 'vera cruz', 'hot-2020', '', 1, 33, 13, 2, '200.00');
+(141, '2021-11-24 13:00:25', '0.00', '37.00', '0.00', '0.00', '0.00', 0, '', '', '', 1, 36, 20, 14, '0.00'),
+(142, '2021-11-24 13:01:35', '0.00', '140.00', '0.00', '0.00', '0.00', 1, 'clio', 'não informado', '', 1, 32, 20, 6, '0.00'),
+(143, '2021-11-24 14:12:03', '40.00', '0.00', '0.00', '0.00', '0.00', 1, 'fox', 'não informado', '', 1, 20, 20, 5, '0.00'),
+(144, '2021-11-24 14:12:41', '0.00', '0.00', '30.00', '0.00', '0.00', 1, 'siena', 'não informado', '', 1, 29, 20, 1, '0.00'),
+(145, '2021-11-24 14:13:59', '0.00', '110.00', '0.00', '0.00', '0.00', 1, 'kics', 'não informado', '', 1, 3, 20, 9, '70.00'),
+(146, '2021-11-24 14:15:06', '0.00', '20.00', '0.00', '0.00', '0.00', 0, '', '', '', 1, 41, 20, 14, '0.00'),
+(147, '2021-11-24 14:24:05', '0.00', '119.00', '0.00', '0.00', '0.00', 0, '', '', '', 1, 33, 20, 14, '0.00'),
+(148, '2021-11-24 14:24:31', '0.00', '150.00', '0.00', '0.00', '0.00', 0, '', '', '', 1, 34, 20, 14, '0.00');
 
 -- --------------------------------------------------------
 
@@ -294,7 +300,7 @@ CREATE TABLE `pagamento` (
 --
 
 INSERT INTO `pagamento` (`id`, `data`, `valor`, `status`, `caixa_id`) VALUES
-(3, '2021-11-22', '150.00', 0, 13);
+(10, '2021-11-24', '35.00', 0, 20);
 
 -- --------------------------------------------------------
 
@@ -316,11 +322,40 @@ CREATE TABLE `servicos` (
 --
 
 INSERT INTO `servicos` (`id`, `data`, `data1`, `extra_id`, `mecanicos_id`, `valor`) VALUES
-(7, '2021-11-19', '2021-11-19 19:24:04', 2, 1, '20.00'),
-(8, '2021-11-19', '2021-11-19 19:24:23', 4, 1, '20.00'),
-(9, '2021-11-19', '2021-11-19 19:24:48', 3, 1, '15.00'),
-(10, '2021-11-19', '2021-11-19 19:25:27', 5, 3, '20.00'),
-(11, '2021-11-19', '2021-11-19 19:25:41', 3, 3, '30.00');
+(12, '2021-11-01', '2021-11-23 17:46:13', 2, 2, '20.00'),
+(13, '2021-11-01', '2021-11-23 17:46:38', 2, 2, '20.00'),
+(14, '2021-11-01', '2021-11-23 17:47:07', 2, 3, '20.00'),
+(15, '2021-11-13', '2021-11-23 17:48:17', 2, 9, '20.00'),
+(16, '2021-11-04', '2021-11-23 17:48:41', 2, 5, '20.00'),
+(17, '2021-11-04', '2021-11-23 17:49:04', 3, 1, '10.00'),
+(18, '2021-11-05', '2021-11-23 17:50:52', 3, 1, '10.00'),
+(19, '2021-11-08', '2021-11-23 17:51:25', 2, 5, '40.00'),
+(20, '2021-11-08', '2021-11-23 17:51:44', 2, 1, '20.00'),
+(21, '2021-11-09', '2021-11-23 17:52:16', 3, 10, '15.00'),
+(22, '2021-11-10', '2021-11-23 17:54:14', 2, 5, '20.00'),
+(23, '2021-11-11', '2021-11-23 17:54:37', 2, 5, '40.00'),
+(24, '2021-11-13', '2021-11-23 17:55:06', 2, 5, '20.00'),
+(25, '2021-11-16', '2021-11-23 17:55:46', 3, 5, '10.00'),
+(26, '2021-11-16', '2021-11-23 17:56:30', 2, 5, '20.00'),
+(27, '2021-11-04', '2021-11-23 17:56:50', 3, 3, '30.00'),
+(28, '2021-11-13', '2021-11-23 17:57:08', 3, 8, '5.00'),
+(29, '2021-11-19', '2021-11-23 17:57:45', 2, 1, '20.00'),
+(30, '2021-11-20', '2021-11-23 17:57:58', 2, 3, '20.00'),
+(31, '2021-11-19', '2021-11-23 17:58:18', 2, 9, '20.00'),
+(32, '2021-11-13', '2021-11-23 17:58:40', 2, 10, '20.00'),
+(33, '2021-11-01', '2021-11-23 17:58:54', 2, 3, '20.00'),
+(34, '2021-11-04', '2021-11-23 17:59:06', 2, 2, '20.00'),
+(35, '2021-11-04', '2021-11-23 17:59:25', 2, 7, '20.00'),
+(36, '2021-11-22', '2021-11-23 18:00:49', 3, 11, '25.00'),
+(37, '2021-11-20', '2021-11-23 18:01:27', 2, 3, '20.00'),
+(38, '2021-11-17', '2021-11-23 18:01:52', 2, 3, '20.00'),
+(39, '2021-11-19', '2021-11-23 18:02:08', 2, 3, '20.00'),
+(40, '2021-11-19', '2021-11-23 18:02:31', 2, 9, '20.00'),
+(41, '2021-11-11', '2021-11-23 18:08:50', 2, 5, '20.00'),
+(42, '2021-11-17', '2021-11-23 18:09:29', 2, 8, '20.00'),
+(43, '2021-11-19', '2021-11-23 18:10:31', 2, 10, '30.00'),
+(44, '2021-11-13', '2021-11-23 18:12:58', 2, 9, '20.00'),
+(45, '2021-11-23', '2021-11-23 18:13:15', 2, 9, '20.00');
 
 -- --------------------------------------------------------
 
@@ -394,7 +429,8 @@ ALTER TABLE `forma_pagamento`
 ALTER TABLE `maobra`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_movimentacoes_copy1_mecanicos1_idx` (`mecanicos_id`),
-  ADD KEY `fk_maobra_caixa_idx` (`caixa_id`);
+  ADD KEY `fk_maobra_caixa_idx` (`caixa_id`),
+  ADD KEY `fk_maobra_catdespesas1_idx` (`catdespesas_id`);
 
 --
 -- Índices para tabela `mecanicos`
@@ -449,7 +485,7 @@ ALTER TABLE `acessos`
 -- AUTO_INCREMENT de tabela `caixa`
 --
 ALTER TABLE `caixa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `cargos`
@@ -461,7 +497,7 @@ ALTER TABLE `cargos`
 -- AUTO_INCREMENT de tabela `catdespesas`
 --
 ALTER TABLE `catdespesas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de tabela `extra`
@@ -479,7 +515,7 @@ ALTER TABLE `forma_pagamento`
 -- AUTO_INCREMENT de tabela `maobra`
 --
 ALTER TABLE `maobra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT de tabela `mecanicos`
@@ -491,19 +527,19 @@ ALTER TABLE `mecanicos`
 -- AUTO_INCREMENT de tabela `movimentacoes`
 --
 ALTER TABLE `movimentacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT de tabela `pagamento`
 --
 ALTER TABLE `pagamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `servicos`
 --
 ALTER TABLE `servicos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
@@ -519,7 +555,8 @@ ALTER TABLE `usuarios`
 -- Limitadores para a tabela `maobra`
 --
 ALTER TABLE `maobra`
-  ADD CONSTRAINT `fk_maobra_caixa` FOREIGN KEY (`caixa_id`) REFERENCES `caixa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_maobra_caixa` FOREIGN KEY (`caixa_id`) REFERENCES `caixa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_maobra_catdespesas1` FOREIGN KEY (`catdespesas_id`) REFERENCES `catdespesas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `pagamento`

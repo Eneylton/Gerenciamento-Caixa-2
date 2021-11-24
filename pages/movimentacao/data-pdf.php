@@ -113,7 +113,7 @@ foreach ($listar as $item) {
 }
 
 $geral = ($cartao + $debito + $pix + $transferencia);
-$saldo = ($saida - $total_dinheiro);
+$saldo = ($total_dinheiro - $saida );
 
 ?>
 
