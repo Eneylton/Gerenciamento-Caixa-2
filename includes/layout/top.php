@@ -70,7 +70,7 @@ $usuario = $usuariologado ?
                     }
 
                     ?>" style="display: none;">
-          <a href="../../pages/servicos/servicos-list.php" class="nav-link">Serviços extras</a>
+          <a href="../../pages/maobra/maobra-list2.php" class="nav-link">Mão de obra</a>
         </li>
 
         <li class="<?php
@@ -92,8 +92,10 @@ $usuario = $usuariologado ?
                     }
 
                     ?>" style="display: none;">
-          <a href="../../pages/pagamentos/pagamento-list.php" class="nav-link">Pagamentos</a>
+          <a href="../../pages/servicos/servicos-list.php" class="nav-link">Serviços extras</a>
         </li>
+
+
         <li class="<?php
 
                     switch ($acesso) {
@@ -116,6 +118,7 @@ $usuario = $usuariologado ?
           <a href="../../pages/mecanicos/mecanico-list.php" class="nav-link">Mecânicos</a>
         </li>
 
+
         <li class="<?php
 
                     switch ($acesso) {
@@ -135,9 +138,8 @@ $usuario = $usuariologado ?
                     }
 
                     ?>" style="display: none;">
-          <a href="../../pages/maobra/maobra-list2.php" class="nav-link">Mão de obra</a>
+          <a href="../../pages/pagamentos/pagamento-list.php" class="nav-link">Pagamentos</a>
         </li>
-
 
       </ul>
 
