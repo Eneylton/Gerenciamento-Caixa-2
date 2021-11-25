@@ -85,6 +85,7 @@ if(isset($_POST['idcaixa'])){
 
         $pagamento->data  =  $agora;
         $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
         $pagamento->atualizar();
 
         
@@ -473,6 +474,8 @@ if(isset($_POST['idcaixa'])){
     $item->mecanicos_id = $mec;
     $item->maobra =  $maobra5;
     $item->cadastar();
+
+   
 
     if($_POST['catdespesas_id'] == 38){
 
