@@ -7,6 +7,7 @@ $dinheiro2 = 0;
    $transferencia2 =0;
 
 $total = 0;
+$apagar = 0;
 
 foreach ($pagar as $item) {
 
@@ -15,6 +16,9 @@ $credito = $item->credito;
 $debito = $item->debito;
 $pix = $item->pix;
 $transferencia = $item->transferencia;
+
+$apagar = ($dinheiro + $credito + $debito + $pix + $transferencia);
+
 }
 
 $resultados = "";
@@ -54,7 +58,7 @@ foreach ($detalhes as $item) {
               <div class="card-header border-0">
                 <a href="../../pages/pagamentos/pagamento-list.php"><h3 class="card-title">VALOR A PAGAR</h3></a>
                 <div class="card-tools">
-                  <h2 style="color:#4f99e3">R$ <?= number_format($dinheiro,"2",",",".") ?></h2>
+                  <h2 style="color:#4f99e3">R$ <?= number_format($apagar,"2",",",".") ?></h2>
                 </div>
               </div>
               <div class="card-body">

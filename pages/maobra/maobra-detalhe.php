@@ -34,7 +34,7 @@ m.cartao AS cartao,
 m.debito AS debito,
 m.pix AS pix,
 m.transferencia AS transferencia,
-m.servico AS servicos,
+m.catdespesas_id AS catdespesas_id,
 mc.nome AS mecanico','maobra AS m
 INNER JOIN
 mecanicos AS mc ON (m.mecanicos_id = mc.id)','m.tipo = 0 AND m.caixa_id ='.$idcaixa,null,null);
@@ -43,7 +43,7 @@ $detalhes = Maobra :: getList('m.data AS data,
 m.placa AS placa,
 m.veiculo as veiculo,
 mc.nome AS mecanico,
-m.servico AS servico,
+m.catdespesas_id AS catdespesas_id,
 m.dinheiro AS dinheiro,
 m.debito AS debito,
 m.cartao AS cartao,

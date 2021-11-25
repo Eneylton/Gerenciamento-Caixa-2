@@ -11,6 +11,7 @@ foreach ($listar as $item) {
    $resultados .= '<tr>
                       <td style="display:none">' . $item->id . '</td>
                       <td style="display:none">' . $item->valor . '</td>
+                      <td style="display:none">' . $item->saldo . '</td>
                       <td style="display:none">' . $item->data . '</td>
                       <td style="display:none">' . $item->status . '</td>
                       <td style="display:none">' . $item->caixa_id . '</td>
@@ -23,6 +24,7 @@ foreach ($listar as $item) {
                       
                       </td>
                       <td>' .date('d/m/Y', strtotime($item->data)). '</td>
+                      <td>R$ ' . number_format($item->saldo,"2",",",".") . '</td>
                       <td>R$ ' . number_format($item->valor,"2",",",".") . '</td>
                      
                     
@@ -37,7 +39,7 @@ foreach ($listar as $item) {
 }
 
 $resultados = strlen($resultados) ? $resultados : '<tr>
-                                                     <td colspan="5" class="text-center" > Nenhuma Vaga Encontrada !!!!! </td>
+                                                     <td colspan="6" class="text-center" > Nenhuma Vaga Encontrada !!!!! </td>
                                                      </tr>';
 
 
@@ -72,7 +74,8 @@ foreach ($paginas as $key => $pagina) {
                         <div class="col-4">
 
                            <label>Buscar por data</label>
-                           <input type="text" class="form-control" name="buscar" value="<?= $buscar ?>">
+                           <input type="date" class="form-control" name="buscar" value="<?= $buscar ?>">
+                           
 
                         </div>
 
@@ -98,7 +101,7 @@ foreach ($paginas as $key => $pagina) {
                   <table class="table table-bordered table-dark table-bordered table-hover table-striped">
                      <thead>
                      <tr>
-                           <td colspan="5">
+                           <td colspan="6">
 
                               <button style="margin-right:50px; font-weight:600; font-size:x-large" type="submit" class="btn btn-default float-right" data-toggle="modal" data-target="#modal-data"> <i class="fas fa-print"></i> &nbsp; IMPRIMIR RELATÓRIOS</button>
 
@@ -109,7 +112,8 @@ foreach ($paginas as $key => $pagina) {
                            <th style="text-align: left; width:80px"> CÓDIGO </th>
                            <th> STATUS</th>
                            <th style="width: 900px;">DATA</th>
-                           <th>VALOR ACUMULADO</th>
+                           <th>A PAGAR</th>
+                           <th>SALDO</th>
                           
                            <th style="text-align: center; width:200px"> AÇÃO </th>
                         </tr>
@@ -119,7 +123,7 @@ foreach ($paginas as $key => $pagina) {
                      </tbody>
 
                      <tr>
-                        <td colspan="3" style="text-align: right;">
+                        <td colspan="4" style="text-align: right;">
 
                         <span>TOTAL</span>
 
@@ -185,7 +189,7 @@ foreach ($paginas as $key => $pagina) {
 <div class="modal fade" id="modal-data">
       <div class="modal-dialog modal-lg">
          <div class="modal-content ">
-            <form action="./gerar-data-pdf.php" method="GET" enctype="multipart/form-data">
+            <form action="./pagamento-data-pdf.php" method="GET" enctype="multipart/form-data">
                <input type="hidden" name="id_caixa" value="<?= $id_caixa ?>">
                <div class="modal-header">
                   <h4 class="modal-title">Relatórios

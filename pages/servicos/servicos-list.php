@@ -28,7 +28,7 @@ $where = implode(' AND ', $condicoes);
 
 $qtd = Servico:: getQtd($where);
 
-$pagination = new Pagination($qtd, $_GET['pagina'] ?? 1, 5);
+$pagination = new Pagination($qtd, $_GET['pagina'] ?? 1, 100);
 
 $listar = Servico::getList('    s.id,
                                 s.data1,
@@ -40,7 +40,7 @@ $listar = Servico::getList('    s.id,
                                 INNER JOIN
                                 mecanicos AS m ON (s.mecanicos_id = m.id)
                                 INNER JOIN
-                                extra AS e ON (s.extra_id = e.id)',$where, 's.id desc',$pagination->getLimit());
+                                extra AS e ON (s.extra_id = e.id)',$where, 'm.nome ASC',$pagination->getLimit());
 
 $mecanicos = Mecanico :: getList('*','mecanicos');
 $extras = Extra :: getList('*','extra',null, 'nome ASC');

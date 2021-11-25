@@ -20,6 +20,7 @@ $saldo = 0;
 
 Login::requireLogin();
 
+$agora = date('Y-m-d');
 
 if(isset($_POST['idcaixa'])){
 
@@ -76,6 +77,16 @@ if(isset($_POST['idcaixa'])){
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
+
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->atualizar();
+
         
       }elseif ($_POST['dinheiro'] && $_POST['debito'] ) {
 
@@ -95,6 +106,17 @@ if(isset($_POST['idcaixa'])){
         $obra->tipo = 0;
         $obra->cadastar();
 
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
+        $pagamento->atualizar();
+
+
       }elseif ($_POST['dinheiro'] && $_POST['pix'] ) {
 
         $valor2 = ($valor  / 2);
@@ -112,6 +134,17 @@ if(isset($_POST['idcaixa'])){
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
+
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
+        $pagamento->atualizar();
+
 
       }elseif ($_POST['dinheiro'] && $_POST['transferencia'] ) {
 
@@ -131,6 +164,17 @@ if(isset($_POST['idcaixa'])){
         $obra->tipo = 0;
         $obra->cadastar();
 
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
+        $pagamento->atualizar();
+
+
       }elseif ($_POST['credito'] && $_POST['debito'] ) {
 
         $valor2 = ($valor  / 2);
@@ -149,6 +193,17 @@ if(isset($_POST['idcaixa'])){
         $obra->tipo = 0;
         $obra->cadastar();
 
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
+        $pagamento->atualizar();
+
+
       }elseif ($_POST['credito'] && $_POST['pix'] ) {
 
         $valor2 = ($valor  / 2);
@@ -166,6 +221,17 @@ if(isset($_POST['idcaixa'])){
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
+
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
+        $pagamento->atualizar();
+
        
       }elseif ($_POST['credito'] && $_POST['transferencia'] ) {
 
@@ -185,6 +251,17 @@ if(isset($_POST['idcaixa'])){
         $obra->tipo = 0;
         $obra->cadastar();
 
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
+        $pagamento->atualizar();
+
+
       }elseif ($_POST['debito'] && $_POST['pix'] ) {
 
         $valor2 = ($valor  / 2);
@@ -203,6 +280,17 @@ if(isset($_POST['idcaixa'])){
         $obra->tipo = 0;
         $obra->cadastar();
 
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
+        $pagamento->atualizar();
+
+
       }elseif ($_POST['debito'] && $_POST['transferencia'] ) {
 
         $valor2 = ($valor  / 2);
@@ -220,6 +308,17 @@ if(isset($_POST['idcaixa'])){
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
+
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
+        $pagamento->atualizar();
+
 
       }elseif ($_POST['dinheiro']) {
 
@@ -244,6 +343,7 @@ if(isset($_POST['idcaixa'])){
 
         $pagamento->data  =  $agora;
         $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
         $pagamento->atualizar();
 
       }elseif ($_POST['credito']) {
@@ -261,6 +361,17 @@ if(isset($_POST['idcaixa'])){
         $obra->tipo = 0;
         $obra->cadastar();
 
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
+        $pagamento->atualizar();
+
+
       }elseif ($_POST['debito']) {
 
         $obra = new Maobra;
@@ -275,6 +386,17 @@ if(isset($_POST['idcaixa'])){
         $obra->status = 0;
         $obra->tipo = 0;
         $obra->cadastar();
+
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
+        $pagamento->atualizar();
+
 
       }elseif ($_POST['pix']) {
 
@@ -291,6 +413,17 @@ if(isset($_POST['idcaixa'])){
         $obra->tipo = 0;
         $obra->cadastar();
 
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
+        $pagamento->atualizar();
+
+
       }elseif ($_POST['transferencia']) {
 
         $obra = new Maobra;
@@ -306,9 +439,18 @@ if(isset($_POST['idcaixa'])){
         $obra->tipo = 0;
         $obra->cadastar();
 
+        
+        $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
+        $valorPag = $pagamento->valor;
+        $saldo = ($valorPag + $valor);
+
+        $pagamento->data  =  $agora;
+        $pagamento->valor =  $saldo;
+        $pagamento->saldo =  $saldo;
+        $pagamento->atualizar();
+
+
       }
-      
-      
       
       {
 
@@ -333,8 +475,6 @@ if(isset($_POST['idcaixa'])){
     $item->cadastar();
 
     if($_POST['catdespesas_id'] == 38){
-        
-      $agora = date('Y-m-d');
 
       $pagamento = Pagamento ::getCaixaId('*','pagamento',$_POST['idcaixa'],null,null);
       $valorPag = $pagamento->valor;
@@ -354,6 +494,7 @@ if(isset($_POST['idcaixa'])){
       $pagamento->data    =  $agora;
       $pagamento->status  =  $status;
       $pagamento->valor   =  $saldo;
+      $pagamento->saldo   =  $saldo;
       $pagamento->atualizar();
 
 

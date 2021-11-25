@@ -40,6 +40,7 @@ $res = "";
 $listar = Servico::getList(
     's.id,
 s.data1,
+s.data,
 s.mecanicos_id,
 s.extra_id,
 s.valor,
@@ -51,7 +52,7 @@ e.nome as extra',
                     INNER JOIN
                     extra AS e ON (s.extra_id = e.id)',
     $consulta,
-    's.data ASC',
+    'm.nome ASC',
     null
 );
 
@@ -60,10 +61,10 @@ foreach ($listar as $item) {
 $subtotal += $item->valor;
 
     $res .= '   <tr>
-                        <td style="text-align:left;width:150px">' . date('d/m/Y  Á\S  H:i:s', strtotime($item->data1)) . '</td>
+                        <td style="text-align:left;width:150px">' . date('d/m/Y ', strtotime($item->data)) . '</td>
                         <td style="text-align:left">' . $item->mecanicos . '</td>
-                        <td style="text-align:left">' . $item->extra . '</td>
-                        <td>R$ ' . number_format($item->valor, "2", ",", ".") . '</td>
+                        <td style="text-align:left; width:200px">' . $item->extra . '</td>
+                        <td style="width:50px">R$ ' . number_format($item->valor, "2", ",", ".") . '</td>
                         
                 </tr>
                 ';

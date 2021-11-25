@@ -13,6 +13,7 @@ class Pagamento
     public $id;
     public $data;
     public $valor;
+    public $saldo;
     public $status;
     public $caixa_id;
 
@@ -26,6 +27,7 @@ class Pagamento
 
             'data'           => $this->data,
             'valor'          => $this->valor,
+            'saldo'          => $this->saldo,
             'status'         => $this->status,
             'caixa_id'       => $this->caixa_id
 
@@ -42,6 +44,7 @@ class Pagamento
 
             'data'           => $this->data,
             'valor'          => $this->valor,
+            'saldo'          => $this->saldo,
             'status'         => $this->status,
             'caixa_id'       => $this->caixa_id
         ]);
