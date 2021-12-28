@@ -49,6 +49,27 @@ $usuario = $usuariologado ?
                     ?>" style="display: none;">
           <a href="pages/caixa/caixa-list.php" class="nav-link">Caixa</a>
         </li>
+        <li class="<?php
+
+                    switch ($acesso) {
+                      case '2':
+                        echo "nav-item d-none d-sm-inline-block";
+                        break;
+                      case '3':
+                        echo "";
+                        break;
+                      case '4':
+                        echo "";
+                        break;
+
+                      default:
+                        echo "nav-item d-none d-sm-inline-block";
+                        break;
+                    }
+
+                    ?>" style="display: none;">
+          <a href="pages/catdespesas/catdespesas-list.php" class="nav-link">Categorias</a>
+        </li>
 
         <li class="<?php
 
@@ -94,28 +115,7 @@ $usuario = $usuariologado ?
           <a href="pages/servicos/servicos-list.php" class="nav-link">Servicos extras </a>
         </li>
 
-        <li class="<?php
-
-                    switch ($acesso) {
-                      case '2':
-                        echo "nav-item d-none d-sm-inline-block";
-                        break;
-                      case '3':
-                        echo "";
-                        break;
-                      case '4':
-                        echo "";
-                        break;
-
-                      default:
-                        echo "nav-item d-none d-sm-inline-block";
-                        break;
-                    }
-
-                    ?>" style="display: none;">
-          <a href="pages/mecanicos/mecanico-list.php" class="nav-link">Mecânicos</a>
-        </li>
-
+  
 
 
         <li class="<?php

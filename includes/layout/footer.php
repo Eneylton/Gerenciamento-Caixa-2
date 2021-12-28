@@ -110,15 +110,7 @@
   });
 </script>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#cpf").mask("000.000.000-00")
-    $("#cel").mask("(00) 00000-0000")
-    $("#dinheiro").mask("999.999.990,00", {
-      reverse: true
-    })
-  })
-</script>
+
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -131,53 +123,6 @@
 </script>
 
 
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#cpf").mask("000.000.000-00")
-    $("#telefone").mask("(00) 0000-0000")
-    $("#dinheiro2").mask("999.999.990,00", {
-      reverse: true
-    })
-  })
-</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#cpf").mask("000.000.000-00")
-    $("#telefone").mask("(00) 0000-0000")
-    $("#dinheiro3").mask("999.999.990,00", {
-      reverse: true
-    })
-  })
-</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#cpf").mask("000.000.000-00")
-    $("#telefone").mask("(00) 0000-0000")
-    $("#dinheiro4").mask("999.999.990,00", {
-      reverse: true
-    })
-  })
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#cpf").mask("000.000.000-00")
-    $("#telefone").mask("(00) 0000-0000")
-    $("#dinheiro5").mask("999.999.990,00", {
-      reverse: true
-    })
-  })
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#cpf").mask("000.000.000-00")
-    $("#telefone").mask("(00) 0000-0000")
-    $("#dinheiro22").mask("999.999.990,00", {
-      reverse: true
-    })
-  })
-</script>
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -231,15 +176,7 @@
   })
 </script>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#cpf").mask("000.000.000-00")
-    $("#telefone").mask("(00) 0000-0000")
-    $("#maobra22").mask("999.999.990,00", {
-      reverse: true
-    })
-  })
-</script>
+
 
 <script type="text/javascript">
   $(document).ready(function() {

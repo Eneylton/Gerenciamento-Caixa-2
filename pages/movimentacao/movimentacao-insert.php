@@ -60,6 +60,12 @@ if(isset($_POST['idcaixa'])){
 
       $valor = ($maobra5 / 2);
 
+      if(!empty($mec)){
+
+        echo "ok";
+
+      }
+
       if( $_POST['dinheiro'] && $_POST['credito']){
 
         $valor2 = ($valor  / 2);

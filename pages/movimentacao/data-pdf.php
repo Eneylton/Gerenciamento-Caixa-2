@@ -36,7 +36,7 @@ if($catdespesas_id == ""){
 }
 
 
-$consulta = "m.data between '".$dataInicio."' AND '".$dataFim."' AND caixa_id = '".$id_caixa."'".$var4;
+$consulta = "m.data between '".$dataInicio."' AND '".$dataFim."'".$var4;
 
 $result = "";
 
@@ -92,6 +92,7 @@ foreach ($listar as $item) {
 
     $result .= '   <tr>
                         
+                        <td style="text-transform: uppercase; text-align:left">' .date('d/m/Y à\s H:i:s ', strtotime($item->data)). ' </span></td>
                         <td style="text-transform: uppercase; text-align:left">' . $veiculo . ' / <span style="color:#ff0000"> ' . $item->placa . ' </span></td>
                         <td style="text-transform: uppercase;text-align:left">' . $item->categoria . '</td>
                         <td style="text-transform: uppercase;text-align:left">' .$item->mecanicos. '</td>
@@ -112,8 +113,8 @@ foreach ($listar as $item) {
                 ';
 }
 
-$geral = ($dinheiro + $cartao + $debito + $pix + $transferencia);
 $saldo = ($total_dinheiro - $saida );
+$geral = ($saldo + $cartao + $debito + $pix + $transferencia);
 
 ?>
 
@@ -239,14 +240,15 @@ $saldo = ($total_dinheiro - $saida );
 
             <tr style="background-color: #000; color:#fff">
 
-                <td style="text-align:left; width:205px"> VEÍCULO / PLACA</td>                
-                <td style="text-align:left;width:205px"> CATEGORIA</td>                
-                <td style="text-align:left;width:120px"> MECÂNICO</td>                
-                <td style="text-align:left;width:100px"> DINHEIRO</td>                
-                <td style="text-align:left;width:100px"> CRÉDITO</td>                
-                <td style="text-align:left;width:100px"> DÉBITO</td>                
-                <td style="text-align:left;width:100px"> PIX</td>                
-                <td style="text-align:left;width:100px"> TRANSFERÊNCIA</td>                
+                <td style="text-align:center;"> VEÍCULO / DATA</td>                
+                <td style="text-align:left;"> VEÍCULO / PLACA</td>                
+                <td style="text-align:left;"> CATEGORIA</td>                
+                <td style="text-align:left;"> MECÂNICO</td>                
+                <td style="text-align:left;"> DINHEIRO</td>                
+                <td style="text-align:left;"> CRÉDITO</td>                
+                <td style="text-align:left;"> DÉBITO</td>                
+                <td style="text-align:left;"> PIX</td>                
+                <td style="text-align:left;"> TRANSFERÊNCIA</td>                
                        
 
             </tr>
@@ -254,7 +256,7 @@ $saldo = ($total_dinheiro - $saida );
             <?= $result ?>
 
             <tr style="background-color:#036a3a; color:#fff">
-                <td style="text-align: right; text-transform:uppercas" colspan="3">RECEBER</td>
+                <td style="text-align: right; text-transform:uppercas" colspan="4">RECEBER</td>
                 <td style="text-align: left;font-size:12px" colspan="1">R$ <?= number_format($saldo,"2",",",".") ?></td>
                 <td style="text-align: left; " colspan="1">R$ <?= number_format($cartao,"2",",",".") ?></td>
                 <td style="text-align: left; " colspan="1">R$ <?= number_format($debito,"2",",",".") ?></td>
@@ -262,7 +264,7 @@ $saldo = ($total_dinheiro - $saida );
                 <td style="text-align: left; " colspan="1">R$ <?= number_format($transferencia,"2",",",".") ?></td>
             </tr>
             <tr style="background-color:#0d3228; color:#fff">
-                <td style="text-align: right;" colspan="4">A RECEBER</td>
+                <td style="text-align: right;" colspan="5">A RECEBER</td>
                 <td style="text-align:center;font-size:15px" colspan="4">R$ <?= number_format($geral,"2",",",".") ?></td>
                
             </tr>

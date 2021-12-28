@@ -66,7 +66,7 @@ $acesso = $usuariologado['acessos_id'];
                                                         ?>">
         <div class="inner">
         <p>Faturamento Mensal - <?php echo date('d/m/Y'); ?></p>
-          <h3>R$ <?= number_format($mes,"2",",",".") ?></h3>
+          <h3>R$</h3>
         </div>
         <div class="icon">
           <i class="ion ion-cash"></i>
@@ -98,7 +98,7 @@ $acesso = $usuariologado['acessos_id'];
                                                     ?>">
         <div class="inner">
         <p>Despesas Diárias - <?php echo date('d/m/Y'); ?></p>
-          <h3>R$ <?= number_format($despesadia,"2",",",".") ?></h3>
+          <h3>R$ </h3>
         </div>
         <div class="icon">
         <i class="fa fa-minus-circle" aria-hidden="true"></i>
@@ -130,7 +130,7 @@ $acesso = $usuariologado['acessos_id'];
                                                     ?>">
         <div class="inner">
         <p>Despesas Mensal - <?php echo date('d/m/Y'); ?></p>
-          <h3>R$ <?= number_format($despesames,"2",",",".") ?></h3>
+          <h3>R$ </h3>
         </div>
         <div class="icon">
         <i class="fa fa-minus-circle" aria-hidden="true"></i>
@@ -162,7 +162,7 @@ $acesso = $usuariologado['acessos_id'];
                                                     ?>">
         <div class="inner">
         <p>Contas a pagar - <?php echo date('d/m/Y'); ?></p>
-          <h3>R$ <?= number_format($pagamento,"2",",",".") ?></h3>
+          <h3>R$ </h3>
         </div>
         <div class="icon">
         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
@@ -193,7 +193,7 @@ $acesso = $usuariologado['acessos_id'];
                                                     ?>">
         <div class="inner">
         <p>Contas a receber - <?php echo date('d/m/Y'); ?></p>
-          <h3>R$ <?= number_format($recebimento,"2",",",".") ?></h3>
+          <h3>R$ </h3>
         </div>
         <div class="icon">
         <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
@@ -225,7 +225,7 @@ $acesso = $usuariologado['acessos_id'];
                                                     ?>">
         <div class="inner">
         <p>Inventário - <?php echo date('d/m/Y'); ?></p>
-          <h3>R$ <?= number_format($inventario,"2",",",".") ?></h3>
+          <h3>R$ </h3>
         </div>
         <div class="icon">
         <i class="fa fa-indent" aria-hidden="true"></i>
@@ -256,7 +256,7 @@ $acesso = $usuariologado['acessos_id'];
                                                     ?>">
         <div class="inner">
         <p>Lucro do dia - <?php echo date('d/m/Y'); ?></p>
-          <h3>R$ <?= number_format($lucro,"2",",",".") ?></h3>
+          <h3>R$ </h3>
         </div>
         <div class="icon">
         <i class="fa fa-credit-card" aria-hidden="true"></i>

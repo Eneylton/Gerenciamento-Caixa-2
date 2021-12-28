@@ -41,7 +41,7 @@ $where = implode(' AND ', $condicoes);
 
 $qtd = Movimentacao:: getQtd($where);
 
-$pagination = new Pagination($qtd, $_GET['pagina'] ?? 1, 100);
+$pagination = new Pagination($qtd, $_GET['pagina'] ?? 1, 1000);
 
 $listar = Movimentacao::getList(' m.id AS id,
 m.caixa_id AS caixa_id,
@@ -110,7 +110,7 @@ $(document).ready(function(){
         $('#caixa_id').val(data[14]);
         $('#mecanicos_id').val(data[15]);
         $('#mecanicos').val(data[16]);
-        $('#maobra').val(data[17]);
+        $('#maobra22').val(data[17]);
        
     });
 });

@@ -9,6 +9,7 @@ $total_geral = 0;
 $saida = 0;
 $caixa = 0;
 $saldo = 0;
+$contador = 0;
 $total_diaria = 0;
 
 $resultados = '';
@@ -16,6 +17,7 @@ $veiculo = '';
 
 
 foreach ($listar as $item) {
+   $contador += 1;
    $id_caixa = $item->caixa_id;
    $total_credito += $item->cartao;
    $total_debito += $item->debito;
@@ -59,6 +61,7 @@ foreach ($listar as $item) {
                       <td style="display:none">' . $item->mecanicos_id . '</td>
                       <td style="display:none">' . $item->mecanicos . '</td>
                       <td style="display:none">' . $item->maobra . '</td>
+                      <td>' . $contador . '</td>
                       
 
                      <td>
@@ -179,7 +182,7 @@ foreach ($paginas as $key => $pagina) {
                   <table class="table table-bordered table-dark table-bordered table-hover table-striped">
                      <thead>
                         <tr>
-                           <td colspan="12">
+                           <td colspan="13">
                               <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"> <i class="fas fa-plus"></i> &nbsp; Adicionar</button>
 
                               <a href="movimentacao-detalhe.php?id=<?= $id_caixa ?>">
@@ -196,6 +199,7 @@ foreach ($paginas as $key => $pagina) {
                            </td>
                         </tr>
                         <tr>
+                           <th style="text-align: center; width:50px"> Nª </th>
                            <th style="text-align: center; width:50px"> <i class="fa fa-align-justify" aria-hidden="true"></i> </th>
 
                            <th style="text-align: center;"> STATUS </th>
@@ -216,7 +220,7 @@ foreach ($paginas as $key => $pagina) {
                      </tbody>
 
                      <tr>
-                        <td colspan="6" style="text-align: right;">
+                        <td colspan="7" style="text-align: right;">
                            <span style="font-size: 20px; font-weight:600"> TOTAL</span>
                         </td>
                         <td colspan="1" style="text-align: left">
@@ -277,7 +281,7 @@ foreach ($paginas as $key => $pagina) {
             <input type="hidden" name="idcaixa" value="<?= $idcaixa ?>">
 
             <div class="modal-header">
-               <h4 class="modal-title">Nova categoria
+               <h4 class="modal-title">Movimentar
                </h4>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -303,7 +307,7 @@ foreach ($paginas as $key => $pagina) {
                      <div class="col-6">
 
                         <label>Mão de obra</label>
-                        <input placeholder="R$ 0,00" style="text-transform: uppercase;" class="form-control" name="maobra" id="maobra22">
+                        <input placeholder="R$ 0,00" style="text-transform: uppercase;" class="form-control" name="maobra" id="maobra">
 
                      </div>
 
@@ -474,7 +478,7 @@ foreach ($paginas as $key => $pagina) {
                   <div class="col-6">
 
                      <label>Mão de obra</label>
-                     <input style="text-transform: uppercase;" class="form-control" name="maobra" id="maobra">
+                     <input style="text-transform: uppercase;" class="form-control" name="maobra" id="maobra22">
 
                   </div>
 

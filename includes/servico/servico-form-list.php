@@ -48,10 +48,13 @@ if (isset($_GET['status'])) {
 }
 
 $subtotal = 0;
+$contador = 0;
 
 $resultados = '';
 
 foreach ($listar as $item) {
+
+   $contador += 1;
 
    $subtotal += $item->valor;
 
@@ -63,6 +66,7 @@ foreach ($listar as $item) {
                       <td style="display:none">' . $item->mecanicos . '</td>
                       <td style="display:none">' . $item->extra . '</td>
                       
+                      <td style="text-align: left; width:20px">' . $contador. '</td>
                       <td>' . date('d/m/Y à\s H:i:s ', strtotime($item->data1)) . '</td>
                       <td>' . $item->mecanicos . '</td>
                       <td>' . $item->extra . '</td>
@@ -148,12 +152,13 @@ foreach ($paginas as $key => $pagina) {
                   <table class="table table-bordered table-dark table-bordered table-hover table-striped">
                      <thead>
                         <tr>
-                           <td colspan="5">
+                           <td colspan="6">
                               <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#modal-default"> <i class="fas fa-plus"></i> &nbsp; Nova</button>
                               <button type="submit" class="btn btn-default float-right" data-toggle="modal" data-target="#modal-data"> <i class="fas fa-print"></i> &nbsp; IMPRIMIR RELATÓRIOS</button>
                            </td>
                         </tr>
                         <tr>
+                           <th> Nª </th>
                            <th style="text-align: left; width:200px"> DATA </th>
                            <th style="text-align: left; width:200px"> MECÂNICOS </th>
                            <th style="text-align: left; width:200px"> SERVIÇOS EXTRAS </th>
@@ -165,7 +170,7 @@ foreach ($paginas as $key => $pagina) {
                         <?= $resultados ?>
                      </tbody>
                      <tr>
-                           <td colspan="3" style="text-align:right;"> TOTAL GERAL </td>
+                           <td colspan="4" style="text-align:right;"> TOTAL GERAL </td>
                            <td colspan="2"> <span style="font-size: 26px;"> R$ <?= number_format($subtotal,"2",",",".") ?></span> </td>
                            
                         </tr>

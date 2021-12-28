@@ -24,7 +24,7 @@ $where = implode(' AND ', $condicoes);
 
 $qtd = Catdespesa:: getQtd($where);
 
-$pagination = new Pagination($qtd, $_GET['pagina'] ?? 1, 5);
+$pagination = new Pagination($qtd, $_GET['pagina'] ?? 1, 50);
 
 $listar = Catdespesa::getList('*','catdespesas',$where, 'id desc',$pagination->getLimit());
 

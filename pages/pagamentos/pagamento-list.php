@@ -25,9 +25,9 @@ $where = implode(' AND ', $condicoes);
 
 $qtd = pagamento:: getQtd($where);
 
-$pagination = new Pagination($qtd, $_GET['pagina'] ?? 1, 5);
+$pagination = new Pagination($qtd, $_GET['pagina'] ?? 1, 50);
 
-$listar = pagamento::getList('*','pagamento',$where, 'data DESC',$pagination->getLimit());
+$listar = pagamento::getList('*','pagamento','month(data) = MONTH(CURRENT_DATE())', 'data ASC',$pagination->getLimit());
 
 include __DIR__ . '../../../includes/layout/header.php';
 include __DIR__ . '../../../includes/layout/top.php';
@@ -50,7 +50,26 @@ $(document).ready(function(){
         }).get();
 
         $('#id').val(data[0]);
-        $('#valorr').val(data[1]);
+        $('#valor').val(data[1]);
+        $('#comentario').val(data[2]);
+       
+    });
+});
+</script>
+
+<script>
+$(document).ready(function(){
+    $('.editbtn2').on('click', function(){
+        $('#editmodal2').modal('show');
+
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function(){
+            return $(this).text();
+        }).get();
+
+        $('#id2').val(data[0]);
+        $('#valor2').val(data[1]);
        
     });
 });

@@ -15,29 +15,50 @@ $usuarios_email = $usuariologado['email'];
 $dataInicio;
 $dataFim;
 $total = 0;
+$total_valor = 0;
+$total_saldo = 0;
+$geral = 0;
+$contador = 0;
+
+$coment="";
 
 $consulta = "data between '" . $dataInicio . "' AND '" . $dataFim."'";
 
 $result = "";
 
-$listar = Pagamento::getList('*', 'pagamento', $consulta, null, null);
+$listar = Pagamento::getList('*', 'pagamento', $consulta, 'data ASC', null);
 
 
 foreach ($listar as $item) {
+
+    $contador += 1;
     
     $total += $item->valor;
 
+    $total_valor += $item->valor;
+    $total_saldo += $item->saldo;
+
+    if(empty($item->comentario)){
+
+        $coment = '<span style="color:#ff0000">Nenhum comentário</span>';
+     
+     }else{
+        $coment = $item->comentario;
+     }
+  
+
     $result .= '   <tr>
                         
-    <td>' . $item->id . '</td>
+    <td>' . $contador . '</td>
     <td style="text-align:left">
     
-    <span style="color:' . ($item->status <= 0 ? '#ff2121' : '#00ff00') . '">
+    <span style="color:' . ($item->status <= 0 ? '#ff2121' : '#0f954a') . '">
     ' . ($item->status <= 0 ? 'EM ABERTO' : 'PAGO') . '
     </span>
     
     </td>
     <td style="text-align:left">' . date('d/m/Y', strtotime($item->data)) . '</td>
+    <td style="text-align:left">' . $coment. '</td>
     <td style="text-align:left">R$ ' . number_format($item->saldo, "2", ",", ".") . '</td>
     <td style="text-align:left">R$ ' . number_format($item->valor, "2", ",", ".") . '</td>
 
@@ -45,6 +66,7 @@ foreach ($listar as $item) {
                 ';
 }
 
+$geral = ($total_saldo - $total_valor);
 
 ?>
 
@@ -154,8 +176,9 @@ foreach ($listar as $item) {
                     <br />
 
                 </td>
-                <td style="text-align:center; font-weight:600; font-size:12px; border:1px solid #fff;">**** MOVIMENTAÇÕES FINANCEIRAS ****</td>
-                <td style="text-align:center; border:1px solid #fff;">Data de Emissão: <?php echo date("d/m/Y") ?><br></td>
+                <td style="text-align:center; font-weight:600; font-size:12px; border:1px solid #fff;">**** PAGAMENTOS ****</td>
+                <td style="text-align:center; border:1px solid #fff;">Período: <?=  date('d/m/Y', strtotime($dataInicio)) ?> 
+                                                                           até <?=  date('d/m/Y', strtotime($dataFim)) ?> <br></td>
 
             </tr>
         </tbody>
@@ -170,11 +193,12 @@ foreach ($listar as $item) {
 
             <tr style="background-color: #000; color:#fff">
 
-                <td style="text-align:left; width:50px">CÓDIGO</td>
-                <td style="text-align:left;width:100px"> STATUS</td>
-                <td style="text-align:left;width:300px"> DATA</td>
-                <td style="text-align:left;width:150px"> A PAGAR</td>
-                <td style="text-align:left;width:130px"> SALDO DEVEDOR</td>
+                <td style="text-align:left;">CÓDIGO</td>
+                <td style="text-align:left;width:80px"> STATUS</td>
+                <td style="text-align:left;width:80px"> DATA</td>
+                <td style="text-align:left;width:300px"> COMENTÁRIO</td>
+                <td style="text-align:left;width:120px"> A PAGAR</td>
+                <td style="text-align:left;width:120px"> SALDO DEVEDOR</td>
                 
 
 
@@ -190,9 +214,30 @@ foreach ($listar as $item) {
                         </td>
                         <td colspan="1" style="text-align: left;">
 
-                        <span style="font-size: 15px;">R$ <?= number_format($total,"2",",",".") ?></span>
+                        <span style="font-size: 15px;">R$ <?= number_format($total_saldo,"2",",",".") ?></span>
 
                         </td>
+                        <td colspan="2" style="text-align: left;">
+
+                        <span style="font-size: 15px;color:#f3a4a4">R$ <?= number_format($total_valor,"2",",",".") ?></span>
+
+                        </td>
+                      
+                     </tr>
+
+                     <tr style="background-color:#2f7578; color:#fff">
+                        <td colspan="4" style="text-align: right;">
+
+                        <span>RECEBIDO (PAGO)</span>
+
+                        </td>
+                        <td colspan="3" style="text-align: center;">
+
+                        <span style="font-size: 15px;">R$ <?= number_format($geral,"2",",",".") ?></span>
+
+                        </td>
+                      
+                      
                      </tr>
 
 

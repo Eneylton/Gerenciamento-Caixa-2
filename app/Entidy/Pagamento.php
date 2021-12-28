@@ -15,6 +15,7 @@ class Pagamento
     public $valor;
     public $saldo;
     public $status;
+    public $comentario;
     public $caixa_id;
 
     public function cadastar()
@@ -29,6 +30,7 @@ class Pagamento
             'valor'          => $this->valor,
             'saldo'          => $this->saldo,
             'status'         => $this->status,
+            'comentario'     => $this->comentario,
             'caixa_id'       => $this->caixa_id
 
         ]);
@@ -46,6 +48,7 @@ class Pagamento
             'valor'          => $this->valor,
             'saldo'          => $this->saldo,
             'status'         => $this->status,
+            'comentario'     => $this->comentario,
             'caixa_id'       => $this->caixa_id
         ]);
     }

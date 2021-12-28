@@ -40,7 +40,7 @@ $listar = Servico::getList('    s.id,
                                 INNER JOIN
                                 mecanicos AS m ON (s.mecanicos_id = m.id)
                                 INNER JOIN
-                                extra AS e ON (s.extra_id = e.id)',$where, 'm.nome ASC',$pagination->getLimit());
+                                extra AS e ON (s.extra_id = e.id)','s.data1 >= current_date() ', 'm.nome ASC',$pagination->getLimit());
 
 $mecanicos = Mecanico :: getList('*','mecanicos');
 $extras = Extra :: getList('*','extra',null, 'nome ASC');

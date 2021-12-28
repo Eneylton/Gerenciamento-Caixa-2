@@ -70,6 +70,28 @@ $usuario = $usuariologado ?
                     }
 
                     ?>" style="display: none;">
+          <a href="../../pages/catdespesas/catdespesas-list.php" class="nav-link">Categorias</a>
+        </li>
+
+        <li class="<?php
+
+                    switch ($acesso) {
+                      case '2':
+                        echo "nav-item d-none d-sm-inline-block";
+                        break;
+                      case '3':
+                        echo "";
+                        break;
+                      case '4':
+                        echo "";
+                        break;
+
+                      default:
+                        echo "nav-item d-none d-sm-inline-block";
+                        break;
+                    }
+
+                    ?>" style="display: none;">
           <a href="../../pages/maobra/maobra-list2.php" class="nav-link">Mão de obra</a>
         </li>
 
@@ -95,30 +117,6 @@ $usuario = $usuariologado ?
           <a href="../../pages/servicos/servicos-list.php" class="nav-link">Serviços extras</a>
         </li>
 
-
-        <li class="<?php
-
-                    switch ($acesso) {
-                      case '2':
-                        echo "nav-item d-none d-sm-inline-block";
-                        break;
-                      case '3':
-                        echo "";
-                        break;
-                      case '4':
-                        echo "";
-                        break;
-
-                      default:
-                        echo "nav-item d-none d-sm-inline-block";
-                        break;
-                    }
-
-                    ?>" style="display: none;">
-          <a href="../../pages/mecanicos/mecanico-list.php" class="nav-link">Mecânicos</a>
-        </li>
-
-
         <li class="<?php
 
                     switch ($acesso) {
@@ -140,6 +138,7 @@ $usuario = $usuariologado ?
                     ?>" style="display: none;">
           <a href="../../pages/pagamentos/pagamento-list.php" class="nav-link">Pagamentos</a>
         </li>
+
 
       </ul>
 

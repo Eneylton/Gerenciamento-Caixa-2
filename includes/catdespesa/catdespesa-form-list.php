@@ -1,6 +1,7 @@
 <?php
 
 $list = '';
+$contador = 0;
 
 if (isset($_GET['status'])) {
 
@@ -52,8 +53,10 @@ $resultados = '';
 
 foreach ($listar as $item) {
 
+   $contador += 1;
+   
    $resultados .= '<tr>
-                      <td>' . $item->id . '</td>
+                      <td>' .  $contador . '</td>
                       <td>' . $item->nome . '</td>
                     
                       <td style="text-align: center;">

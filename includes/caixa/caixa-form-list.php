@@ -4,14 +4,18 @@ $list = '';
 
 $resultados = '';
 
+$contador = 0;
+
 foreach ($listar as $item) {
+
+   $contador += 1;
 
    $resultados .= '<tr>
                       <td style="display:none">' . $item->id . '</td>
                       <td style="display:none">' . $item->data . '</td>
                       <td style="display:none">' . $item->valor . '</td>
                       <td style="display:none">' . $item->forma_pagamento_id . '</td>
-                      <td >' . $item->id . '</td>
+                      <td >' . $contador  . '</td>
                       <td style="text-transform:uppercase; width:300px"> <h3><span class="badge badge-pill badge-warning">
                       <i class="fa fa-clock" aria-hidden="true"></i> &nbsp; &nbsp;' .date('d/m/Y à\s H:i:s ', strtotime($item->data)). '</span></h3> </td>
                      

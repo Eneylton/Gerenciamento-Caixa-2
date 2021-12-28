@@ -10,7 +10,7 @@ use App\Session\Login;
 
 Login::requireLogin();
 
-$valor_banco = 0;
+$valor_atual = 0;
 $status = 0;
 
 if(!isset($_GET['id']) or !is_numeric($_GET['id'])){
@@ -32,13 +32,16 @@ if(!$value instanceof Pagamento){
 
 if(isset($_GET['valor'])){
 
+    $result = Pagamento :: getID('*','pagamento',$_GET['id'],null,null);
+    $valor_banco = $result->valor;
+
     $vl1            = $_GET['valor'];
     $vl2            = str_replace(".", "", $vl1);
     $vl3            = str_replace(",", ".",$vl2);
 
-    $valor_banco = ($value->valor - $vl3);
+    $valor_atual = ($valor_banco - $_GET['valor']);
 
-    switch ($valor_banco) {
+    switch ($valor_atual) {
         case '0':
             $status = 1;
             break;
@@ -48,8 +51,9 @@ if(isset($_GET['valor'])){
             break;
     }
     
-    $value->valor = $valor_banco ;
+    $value->valor = $valor_atual ;
     $value->status = $status;
+    $value->comentario = $_GET['comentario'];
     $value-> atualizar();
 
     $item = new Movimentacao;

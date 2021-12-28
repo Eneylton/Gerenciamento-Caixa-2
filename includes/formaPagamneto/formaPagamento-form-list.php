@@ -49,6 +49,7 @@ if (isset($_GET['status'])) {
 }
 
 $resultados = '';
+$contador = 0;
 
 foreach ($listar as $item) {
 

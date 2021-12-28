@@ -5,6 +5,7 @@ $list = '';
 $resultados = '';
 
 $total_dinheiro=0;
+$geral=0;
 $total_credito=0;
 $total_debito=0;
 $total_pix=0;
@@ -12,7 +13,11 @@ $saida=0;
 $total_transferencia=0;
 $veiculo="";
 
+$contador = 0;
+
 foreach ($listar as $item) {
+
+   $contador += 1;
 
    $total_dinheiro += $item->dinheiro;
    $total_credito += $item->cartao;
@@ -38,32 +43,16 @@ foreach ($listar as $item) {
                       <td style="display:none">' . $item->cartao . '</td>
                       <td style="display:none">' . $item->debito . '</td>
                       <td style="display:none">' . $item->pix . '</td>
+                      <td style="display:none">' . $item->transferencia . '</td>
                       <td style="display:none">' . $item->veiculo . '</td>
                       <td style="display:none">' . $item->placa . '</td>
-                      <td style="display:none">' . $item->transferencia . '</td>
                       <td style="display:none">' . $item->mecanico . '</td>
 
                     
-                      <td>
-
-                     <span style="color:' . ($item->status <= 0 ? '#ff2121' : '#00ff00') . '"> 
-                     <i class="fa fa-circle" aria-hidden="true"></i> 
-                     </span>
-
-                     </td>
-                     <td style="width:150px">
-                      
-                      <span style="color:' . ($item->status <= 0 ? '#ff2121' : '#00ff00') . '">
-                      ' . ($item->status <= 0 ? 'EM ABERTO' : 'PAGO') . '
-                      </span>
-                      
-                      </td>
-
+                      <td>' . $contador . '</td>
                       <td style="width:150px">
                       
-                      <span style="color:' . ($item->tipo <= 0 ? '#ff2121 ' : '#48da59 ') . '">
-                      ' . ($item->tipo <= 0 ? 'SAIDA' : 'ENTRADA') . '
-                      </span>
+                      <i class="fa fa-clock" aria-hidden="true"></i> &nbsp; &nbsp;' .date('d/m/Y à\s H:i:s ', strtotime($item->data)). '</span></h3> 
                       
                       </td>
                     
@@ -90,7 +79,7 @@ foreach ($listar as $item) {
                       
                       <button type="submit" class="btn btn-warning editbtn" > <i class="fas fa-paint-brush"></i> </button>
                       &nbsp;
-                      <a href="movimentacao-delete.php?id=' . $item->id . '">
+                      <a href="maobra-delete.php?id=' . $item->id . '">
                       <button type="button" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                       </a>
                       </td>
@@ -120,6 +109,8 @@ foreach ($paginas as $key => $pagina) {
                   <button type="button" class="btn ' . $class . '">' . $pagina['pagina'] . '</button>
                   </a>';
 }
+
+$geral = ($total_dinheiro + $total_credito + $total_debito + $total_pix + $total_transferencia);
 
 ?>
 
@@ -161,7 +152,7 @@ foreach ($paginas as $key => $pagina) {
                   <table class="table table-bordered table-dark table-bordered table-hover table-striped">
                      <thead>
                         <tr>
-                           <td colspan="12">
+                           <td colspan="11">
                               <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#modal-default"> <i class="fas fa-plus"></i> &nbsp; Nova</button>
                               <button style="margin-right:50px; font-weight:600;" type="submit" class="btn btn-default float-right" data-toggle="modal" data-target="#modal-data"> <i class="fas fa-print"></i> &nbsp; IMPRIMIR RELATÓRIOS</button>
                            </td>
@@ -169,11 +160,8 @@ foreach ($paginas as $key => $pagina) {
 
 
                         <tr>
-
-                           <th style="text-align: center; width:50px"> <i class="fa fa-align-justify" aria-hidden="true"></i> </th>
-
-                           <th style="text-align: center;"> STATUS </th>
-                           <th style="text-align: center"> TIPO </th>
+                           <th> Nª </th>
+                           <th style="text-align: center;width:300px"> DATA </th>
                            <th style="text-align: left;"> VEÍCULO / PLACA </th>
                            <th style="text-align: left;width:280px"> MECÂNICO </th>
                            <th style="text-align: left;width:280px"> CATEGORIA </th>
@@ -189,7 +177,7 @@ foreach ($paginas as $key => $pagina) {
                         <?= $resultados ?>
                      </tbody>
                      <tr>
-                        <td colspan="6" style="text-align: right;"> 
+                        <td colspan="5" style="text-align: right;"> 
                             <span>TOTAL</span>
                         </td>
                         <td colspan="1" style="text-align: left;font-size:18px;color:#ff0000"> 
@@ -204,10 +192,12 @@ foreach ($paginas as $key => $pagina) {
                         <td colspan="1" style="text-align: left;font-size:18px; color:#6df951"> 
                             <span>R$ <?= number_format($total_pix,"2",",",".") ?></span>
                         </td>
-                        <td colspan="2" style="text-align: left;font-size:18px;color:#6df951"> 
+                        <td colspan="1" style="text-align: left;font-size:18px;color:#6df951"> 
                             <span>R$ <?= number_format($total_transferencia,"2",",",".") ?></span>
                         </td>
-                       
+                        <td colspan="1" style="text-align: left;font-size:24px;color:#aff"> 
+                            <span>R$ <?= number_format($geral,"2",",",".") ?></span>
+                        </td>
 
                      </tr>
 
@@ -228,44 +218,11 @@ foreach ($paginas as $key => $pagina) {
 
 <?= $paginacao ?>
 
-
-<div class="modal fade" id="modal-default">
-   <div class="modal-dialog">
-      <div class="modal-content bg-light">
-         <form action="./extra-insert.php" method="post">
-
-            <div class="modal-header">
-               <h4 class="modal-title">Novo
-               </h4>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-               </button>
-            </div>
-            <div class="modal-body">
-               <div class="form-group">
-                  <label>Serviços</label>
-                  <input type="text" class="form-control" name="nome" required>
-               </div>
-
-            </div>
-            <div class="modal-footer justify-content-between">
-               <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-               <button type="submit" class="btn btn-primary">Salvar</button>
-            </div>
-
-         </form>
-
-      </div>
-      <!-- /.modal-content -->
-   </div>
-   <!-- /.modal-dialog -->
-</div>
-
 <!-- EDITAR -->
 
 <div class="modal fade" id="editmodal">
-   <div class="modal-dialog">
-      <form action="./extra-edit.php" method="get">
+   <div class="modal-dialog modal-lg">
+      <form action="./maobra-edit.php" method="get">
          <div class="modal-content bg-light">
             <div class="modal-header">
                <h4 class="modal-title">Editar
@@ -276,18 +233,110 @@ foreach ($paginas as $key => $pagina) {
             </div>
             <div class="modal-body">
                <input type="hidden" name="id" id="id">
-               <div class="form-group">
-                  <label>Serviços</label>
-                  <input type="text" class="form-control" name="nome" id="nome" required>
-               </div>
+               <input type="hidden" name="caixa_id" id="caixa_id">
+               <div class="row">
+                  <div class="col-6">
+                     <div class="form-group">
+                        <label>Veículo</label>
+                        <input style="text-transform: uppercase;" type="text" class="form-control" name="veiculo" id="veiculo">
 
+                     </div>
+
+                  </div>
+                  <div class="col-6">
+
+                     <label>Placa</label>
+                     <input style="text-transform: uppercase;" class="form-control" name="placa" id="placa">
+
+                  </div>
+
+                
+
+                  <div class="col-12">
+                     
+                        <label>Mecânicos</label>
+                        <select class="form-control " style="width: 100%;" name="mecanicos_id" id="mecanicos_id">
+
+                          
+                           <?php
+
+                           foreach ($mecanicos as $item) {
+                              echo '<option value="' . $item->id . '">' . $item->nome . '</option>';
+                           }
+                           ?>
+
+                        </select>
+
+                     </div>
+
+
+
+                     <div class="col-12">
+                        <div class="form-group">
+                           <label>Categorias</label>
+                           <select class="form-control" style="width: 100%;" name="catdespesas_id" id="catdespesas_id" required>
+
+                      
+                              <?php
+
+                              foreach ($categorias as $item) {
+                                 echo '<option value="' . $item->id . '">' . $item->nome . '</option>';
+                              }
+                              ?>
+
+                           </select>
+                        </div>
+                     </div>
+                     <div class="col-2">
+                        <div class="form-group">
+                           <label>Dinheiro</label>
+                           <input type="text" class="form-control" name="dinheiro" id="dinheiro">
+                        </div>
+                     </div>
+                     <div class="col-2">
+                        <div class="form-group">
+                           <label>Crédito</label>
+                           <input type="text" class="form-control" name="cartao" id="cartao">
+                        </div>
+                     </div>
+                     <div class="col-2">
+                        <div class="form-group">
+                           <label>Débito</label>
+                           <input type="text" class="form-control" name="debito" id="debito">
+                        </div>
+                     </div>
+                     <div class="col-3">
+                        <div class="form-group">
+                           <label>Pix</label>
+                           <input type="text" class="form-control" name="pix" id="pix">
+                        </div>
+                     </div>
+                     <div class="col-3">
+                        <div class="form-group">
+                           <label>Transferência</label>
+                           <input type="text" class="form-control" name="transferencia" id="transferencia">
+                        </div>
+                     </div>
+
+                   
+                  
+                     <div class="col-12">
+                        <div class="form-group">
+                           <label>Observação</label>
+                           <textarea class="form-control" aria-label="With textarea" name="descricao" id="descricao"></textarea>
+                        </div>
+                     </div>
+
+                  </div>
+
+
+               </div>
+               <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                  <button type="submit" class="btn btn-primary">Salvar
+                  </button>
+               </div>
             </div>
-            <div class="modal-footer justify-content-between">
-               <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-               <button type="submit" class="btn btn-primary">Salvar
-               </button>
-            </div>
-         </div>
       </form>
       <!-- /.modal-content -->
    </div>
